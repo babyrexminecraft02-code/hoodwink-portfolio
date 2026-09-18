@@ -102,6 +102,10 @@ h1 em, h2 em { color: var(--gold); font-style: italic; }
 .footer { display: flex; justify-content: space-between; padding: 25px 4.5vw; background: var(--ink); color: var(--muted); border-top: 1px solid rgba(233,229,219,.18); font: 400 9px var(--mono); letter-spacing: .06em; text-transform: uppercase; }
 .footer a { color: var(--paper); transition: color .2s ease; }
 .footer a:hover { color: var(--green-bright); }
+.social-links { display: flex; align-items: center; gap: 8px; }
+.social-link { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; color: var(--paper) !important; border: 1px solid rgba(233,229,219,.28); border-radius: 50%; transition: color .2s ease, border-color .2s ease, transform .2s var(--ease-out), background .2s ease; }
+.social-link:hover { color: var(--ink) !important; border-color: var(--green-bright); background: var(--green-bright); transform: translateY(-2px); }
+.x-glyph { font: 500 14px/1 var(--sans); text-transform: none; }
 
 @keyframes enter { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes float { 0%, 100% { translate: 0 0; } 50% { translate: 0 -10px; } }
@@ -131,6 +135,7 @@ h1 em, h2 em { color: var(--gold); font-style: italic; }
   .join::before { left: 0; }
   .join::after { right: 0; bottom: -70px; }
   .footer { flex-wrap: wrap; gap: 17px; padding: 22px 8vw; }
+  .social-links { order: 3; width: 100%; }
 }
 
 

@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState, type CSSProperties, type FormEvent, type PointerEvent as ReactPointerEvent, type ReactNode } from "react";
 import { trpc } from "@/lib/trpc";
+import { AtSign, Facebook, Instagram, Music2 } from "lucide-react";
 
 const logo = "https://framerusercontent.com/images/S0ybpNvVj60i1muQdAggq5HURg.svg?width=1024&height=1024";
 const STORAGE_KEY = "hoodwink-editor-state-v1";
@@ -32,6 +33,14 @@ const fontOptions = [
   { label: "DM Sans / body", value: "DM Sans, Arial, sans-serif" },
   { label: "DM Mono / label", value: "DM Mono, monospace" },
   { label: "Archivo / original", value: "Archivo, Arial, sans-serif" },
+];
+
+const socialLinks = [
+  { label: "Instagram", href: "https://www.instagram.com/hoodwink_co", icon: Instagram },
+  { label: "Facebook", href: "https://www.facebook.com/HoodWink.1230", icon: Facebook },
+  { label: "TikTok", href: "https://www.tiktok.com/@hoodwink_co", icon: Music2 },
+  { label: "X", href: "https://x.com/hoodwink_co", icon: null },
+  { label: "Threads", href: "https://www.threads.com/@hoodwink_co", icon: AtSign },
 ];
 
 function readStoredState(): EditorState {
@@ -341,7 +350,7 @@ export default function Home() {
       <section className="manifesto section-grid"><div className="section-label"><Editable id="manifesto-index" label="Manifesto section number" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag}>03</Editable><Editable id="manifesto-label" label="Manifesto section label" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag}>In plain sight</Editable></div><div className="manifesto-copy"><Editable id="manifesto" label="Manifesto close" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag} style={styleFor("manifesto")}><p>We don&apos;t sell a costume.</p><h2>We sell the moment<br />with a touch of art<br /><em>we call Trompe L&apos;oeil.</em></h2></Editable></div></section>
 
       <section className="join" id="join"><div className="join-inner"><img src={logo} alt="" className="join-logo" /><Editable id="join-eyebrow" label="Join eyebrow" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag} className="eyebrow">Know before it drops.</Editable><Editable id="join-title" label="Join title" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag} className="join-title"><h2>No spam.<br /><em>Just the good stuff.</em></h2></Editable><Editable id="join-copy" label="Join description" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag} className="join-copy">No spam, no restocks announced twice. Just word, early, to the people already in on it. HoodWink never sells your information. That&apos;s the one trick we don&apos;t play.</Editable>{submitted ? <div className="success-message" role="status">You&apos;re in. Keep your eyes open.</div> : <form className="signup-form" onSubmit={handleSubmit}><label className="sr-only" htmlFor="email">Email address</label><input id="email" type="email" required placeholder="Your email address" value={email} onChange={(event) => setEmail(event.target.value)} /><button type="submit">Join the list <span>↗</span></button></form>}</div></section>
-      <footer className="footer"><Editable id="footer-mark" label="Footer mark" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag}>HOODWINK / 2026</Editable><Editable id="footer-note" label="Footer note" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag}>A trick, worn well.</Editable><a href="#top"><Editable id="footer-back" label="Footer back link" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag}>Back to top ↑</Editable></a></footer>
+      <footer className="footer"><Editable id="footer-mark" label="Footer mark" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag}>HOODWINK / 2026</Editable><Editable id="footer-note" label="Footer note" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag}>A trick, worn well.</Editable><div className="social-links" aria-label="HoodWink social links">{socialLinks.map(({ label, href, icon: Icon }) => <a key={label} className="social-link" href={href} target="_blank" rel="noreferrer" aria-label={label} title={label}>{Icon ? <Icon size={15} strokeWidth={1.7} /> : <span className="x-glyph">𝕏</span>}</a>)}</div><a href="#top"><Editable id="footer-back" label="Footer back link" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag}>Back to top ↑</Editable></a></footer>
       </div>
       </div>
     </main>
