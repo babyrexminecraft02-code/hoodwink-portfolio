@@ -43,8 +43,7 @@ export default function Home() {
     <main className="site-shell">
       <header className="nav-wrap">
         <a className="brand-lockup" href="#top" aria-label="HoodWink home">
-          <img src={logo} alt="" />
-          <span>HoodWink</span>
+          <img src={logo} alt="HoodWink" />
         </a>
         <nav className="desktop-nav" aria-label="Primary navigation">
           <a href="#story">The story</a>
@@ -57,9 +56,9 @@ export default function Home() {
       <section className="hero" id="top">
         <div className="hero-topline"><span>EST. 2026</span><span>Dhaka / Worldwide</span></div>
         <div className="hero-copy">
-          <p className="eyebrow">A streetwear label built on</p>
-          <h1>The art<br /><em>of the reveal.</em></h1>
-          <p className="hero-intro">Clothes with a second read, made for people who like being the only ones who get the joke.</p>
+          <p className="eyebrow">A streetwear label</p>
+          <h1>Built on<br /><em>the art of the reveal.</em></h1>
+          <p className="hero-intro">A streetwear label built on the art of the reveal.</p>
           <a className="text-link" href="#join"><span>Get early access</span><b>↘</b></a>
         </div>
         <div className="hero-stamp" aria-hidden="true">
@@ -73,10 +72,10 @@ export default function Home() {
       <section className="story section-grid" id="story">
         <div className="section-label"><span>01</span><span>What we believe</span></div>
         <div className="story-content">
-          <p className="display-copy">A wink is a small deception everyone&apos;s in on.</p>
+          <p className="display-copy">A wink is a small deception everyone&apos;s in on. That&apos;s the label: clothes with a second read, built for people who like being the only ones who get the joke.</p>
           <div className="story-columns">
-            <p>That&apos;s the label: clothes with a second read, built for people who like being the only ones who get the joke.</p>
-            <p>We don&apos;t sell a costume. We sell the moment with a touch of art we call <em>trompe l&apos;oeil.</em></p>
+            <p>Every good trick has two audiences: the one who&apos;s tricked, and the second who&apos;s <em>in on it.</em></p>
+            <p>HoodWink dresses the second kind. A silhouette that catches the eye of a person across the street and that you can call <em>Deceiving.</em></p>
           </div>
         </div>
       </section>
@@ -84,7 +83,7 @@ export default function Home() {
       <section className="drop" id="drop">
         <div className="drop-header section-grid">
           <div className="section-label"><span>02</span><span>The first drop</span></div>
-          <div className="drop-heading"><h2>Six pieces.<br /><em>No restock.</em></h2><p>Once a trick&apos;s been seen, it&apos;s over.</p></div>
+          <div className="drop-heading"><h2>Six pieces.<br /><em>No restock.</em></h2><p>No restock, no re-run. Once a trick&apos;s been seen, it&apos;s over.</p></div>
         </div>
         <div className="pieces-grid">
           {pieces.map((piece) => (
@@ -102,7 +101,7 @@ export default function Home() {
 
       <section className="manifesto section-grid">
         <div className="section-label"><span>03</span><span>In plain sight</span></div>
-        <div className="manifesto-copy"><p>Every good trick has two audiences:</p><h2>The one who&apos;s tricked,<br />and the second<br /><em>who&apos;s in on it.</em></h2></div>
+        <div className="manifesto-copy"><p>We don&apos;t sell a costume.</p><h2>We sell the moment<br />with a touch of art<br /><em>we call Trompe L&apos;oeil.</em></h2></div>
       </section>
 
       <section className="join" id="join">
@@ -110,7 +109,7 @@ export default function Home() {
           <img src={logo} alt="" className="join-logo" />
           <p className="eyebrow">Know before it drops.</p>
           <h2>No spam.<br /><em>Just the good stuff.</em></h2>
-          <p className="join-copy">Early word, to the people already in on it. HoodWink never sells your information. That&apos;s the one trick we don&apos;t play.</p>
+          <p className="join-copy">No spam, no restocks announced twice. Just word, early, to the people already in on it. HoodWink never sells your information. That&apos;s the one trick we don&apos;t play.</p>
           {submitted ? (
             <div className="success-message" role="status">You&apos;re in. Keep your eyes open.</div>
           ) : (
