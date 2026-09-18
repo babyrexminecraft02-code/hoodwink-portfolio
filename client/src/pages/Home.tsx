@@ -84,10 +84,17 @@ export default function Home() {
   const [showHelp, setShowHelp] = useState(false);
   const [panelPosition, setPanelPosition] = useState({ x: 0, y: 0 });
   const [panelDragging, setPanelDragging] = useState(false);
+  const [panelSide, setPanelSide] = useState<"right" | "left">("right");
+  const [zoom, setZoom] = useState(1);
+  const [pan, setPan] = useState({ x: 0, y: 0 });
+  const [handTool, setHandTool] = useState(false);
+  const [showGuides, setShowGuides] = useState(true);
+  const [isPanning, setIsPanning] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const localFileInputRef = useRef<HTMLInputElement>(null);
   const dragRef = useRef({ id: "", startX: 0, startY: 0, originX: 0, originY: 0 });
   const panelDragRef = useRef({ startX: 0, startY: 0, originX: 0, originY: 0 });
+  const panRef = useRef({ startX: 0, startY: 0, originX: 0, originY: 0 });
 
   const assist = trpc.editor.assist.useMutation();
   const generate = trpc.editor.generateImage.useMutation();
@@ -149,6 +156,26 @@ export default function Home() {
     if (!panelDragging) return;
     const { startX, startY, originX, originY } = panelDragRef.current;
     setPanelPosition({ x: originX + event.clientX - startX, y: originY + event.clientY - startY });
+  }
+
+  function startPan(event: ReactPointerEvent<HTMLDivElement>) {
+    if (!editMode || !handTool) return;
+    if ((event.target as HTMLElement).closest("[data-edit-id], button, a, input, textarea, select")) return;
+    event.preventDefault();
+    setIsPanning(true);
+    panRef.current = { startX: event.clientX, startY: event.clientY, originX: pan.x, originY: pan.y };
+    event.currentTarget.setPointerCapture?.(event.pointerId);
+  }
+
+  function movePan(event: ReactPointerEvent<HTMLElement>) {
+    if (!isPanning) return;
+    const { startX, startY, originX, originY } = panRef.current;
+    setPan({ x: originX + event.clientX - startX, y: originY + event.clientY - startY });
+  }
+
+  function resetCanvasView() {
+    setZoom(1);
+    setPan({ x: 0, y: 0 });
   }
 
   function resetState() {
@@ -250,7 +277,7 @@ export default function Home() {
   const activeStyle = useMemo(() => styleFor(selectedId ?? ""), [state, selectedId]);
 
   return (
-    <main className={`site-shell ${editMode ? "is-editing" : ""}`} onPointerMove={(event) => { moveDrag(event); movePanel(event); }} onPointerUp={() => { endDrag(); setPanelDragging(false); }}>
+    <main className={`site-shell ${editMode ? "is-editing" : ""}`} onPointerMove={(event) => { moveDrag(event); movePanel(event); movePan(event); }} onPointerUp={() => { endDrag(); setPanelDragging(false); setIsPanning(false); }}>
       <header className="nav-wrap">
         <a className="brand-lockup" href="#top" aria-label="HoodWink home"><img src={logo} alt="HoodWink" /></a>
         <nav className="desktop-nav" aria-label="Primary navigation"><a href="#story">The story</a><a href="#drop">The drop</a><a href="#join">Early access</a></nav>
@@ -261,11 +288,12 @@ export default function Home() {
       </header>
 
       {editMode && (
-        <aside className="editor-panel" aria-label="HoodWink edit mode panel" style={{ transform: `translate(${panelPosition.x}px, ${panelPosition.y}px)` }}>
-          <div className="editor-panel-head" onPointerDown={startPanelDrag}><div><span className="panel-kicker">HoodWink / Studio</span><h2>Edit mode</h2><small className="drag-hint">Drag window to reposition</small></div><button className="panel-close" onClick={closeEditMode} aria-label="Close edit mode">×</button></div>
+        <aside className={`editor-panel ${panelSide === "left" ? "panel-left" : "panel-right"}`} aria-label="HoodWink edit mode panel" style={{ transform: `translate(${panelPosition.x}px, ${panelPosition.y}px)` }}>
+          <div className="editor-panel-head" onPointerDown={startPanelDrag}><div><span className="panel-kicker">HoodWink / Studio</span><h2>Edit mode</h2><small className="drag-hint">Drag window to reposition</small></div><div className="panel-head-actions"><button className="panel-side-switch" onClick={() => { setPanelSide((side) => side === "right" ? "left" : "right"); setPanelPosition({ x: 0, y: 0 }); }} aria-label="Switch editor side">{panelSide === "right" ? "←" : "→"}</button><button className="panel-close" onClick={closeEditMode} aria-label="Close edit mode">×</button></div></div>
           <div className="editor-tabs"><button className={canvasTab === "site" ? "active" : ""} onClick={() => setCanvasTab("site")}>Canvas</button><button className={canvasTab === "edit" ? "active" : ""} onClick={() => setCanvasTab("edit")}>AI edit</button></div>
           {canvasTab === "site" ? (
             <>
+              <div className="canvas-tools"><button className={`tool-button ${handTool ? "active" : ""}`} onClick={() => setHandTool((value) => !value)} aria-label="Toggle hand pan tool">☝ <span>Hand</span></button><label className="zoom-control">Zoom <output>{Math.round(zoom * 100)}%</output><input type="range" min=".75" max="1.75" step=".05" value={zoom} onChange={(event) => setZoom(Number(event.target.value))} /></label><button className={`tool-button ${showGuides ? "active" : ""}`} onClick={() => setShowGuides((value) => !value)}>Guides</button><button className="tool-button" onClick={resetCanvasView}>Reset view</button></div>
               <div className="selection-card"><span className="panel-kicker">Selected element</span><strong>{selectedLabel}</strong><small>{selectedId ? "Drag directly on canvas to move" : "Click any outlined element or layer"}</small></div>
               <div className="control-section"><div className="control-title">Type</div><label>Font<select value={currentEdit.fontFamily ?? ""} onChange={(event) => selectedId && updateEdit(selectedId, { fontFamily: event.target.value || undefined })}><option value="">Original font</option>{fontOptions.map((font) => <option value={font.value} key={font.value}>{font.label}</option>)}</select></label><label className="range-label">Size <output>{currentEdit.fontSize ?? "Auto"}{currentEdit.fontSize ? " px" : ""}</output><input className="range-input" type="range" min="8" max="180" step="1" value={currentEdit.fontSize ?? 48} onChange={(event) => selectedId && updateEdit(selectedId, { fontSize: Number(event.target.value) })} /></label><label className="range-label">Tracking <output>{currentEdit.letterSpacing ?? 0} px</output><input className="range-input" type="range" min="-4" max="30" step=".5" value={currentEdit.letterSpacing ?? 0} onChange={(event) => selectedId && updateEdit(selectedId, { letterSpacing: Number(event.target.value) })} /></label></div>
               <div className="control-section"><div className="control-title">Colour</div><div className="color-row"><input type="color" value={currentEdit.color ?? "#e9e5db"} onChange={(event) => selectedId && updateEdit(selectedId, { color: event.target.value })} /><input className="color-text" value={currentEdit.color ?? "#e9e5db"} onChange={(event) => selectedId && updateEdit(selectedId, { color: event.target.value })} /></div></div>
@@ -290,6 +318,9 @@ export default function Home() {
         </aside>
       )}
 
+      <div className={`canvas-viewport ${handTool ? "hand-enabled" : ""} ${isPanning ? "is-panning" : ""}`} onPointerDown={startPan}>
+      <div className="canvas-stage" style={{ transform: `translate(${pan.x}px, ${pan.y}px) scale(${zoom})` }}>
+      {editMode && showGuides && <div className="persistent-guides" aria-hidden="true"><span className="guide-center-x" /><span className="guide-center-y" /><span className="guide-quarter-x" /><span className="guide-three-quarter-x" /><span className="guide-quarter-y" /><span className="guide-three-quarter-y" /><span className="guide-center-label">CENTER</span></div>}
       <section className="hero" id="top" onClick={(event) => { if (editMode && event.target === event.currentTarget) setSelectedId(null); }}>
         <div className="hero-topline"><Editable id="hero-edition" label="Edition label" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag}>EST. 2026</Editable><Editable id="hero-location" label="Location label" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag}>Dhaka / Worldwide</Editable></div>
         <div className="hero-copy">
@@ -311,6 +342,8 @@ export default function Home() {
 
       <section className="join" id="join"><div className="join-inner"><img src={logo} alt="" className="join-logo" /><Editable id="join-eyebrow" label="Join eyebrow" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag} className="eyebrow">Know before it drops.</Editable><Editable id="join-title" label="Join title" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag} className="join-title"><h2>No spam.<br /><em>Just the good stuff.</em></h2></Editable><Editable id="join-copy" label="Join description" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag} className="join-copy">No spam, no restocks announced twice. Just word, early, to the people already in on it. HoodWink never sells your information. That&apos;s the one trick we don&apos;t play.</Editable>{submitted ? <div className="success-message" role="status">You&apos;re in. Keep your eyes open.</div> : <form className="signup-form" onSubmit={handleSubmit}><label className="sr-only" htmlFor="email">Email address</label><input id="email" type="email" required placeholder="Your email address" value={email} onChange={(event) => setEmail(event.target.value)} /><button type="submit">Join the list <span>↗</span></button></form>}</div></section>
       <footer className="footer"><Editable id="footer-mark" label="Footer mark" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag}>HOODWINK / 2026</Editable><Editable id="footer-note" label="Footer note" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag}>A trick, worn well.</Editable><a href="#top"><Editable id="footer-back" label="Footer back link" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag}>Back to top ↑</Editable></a></footer>
+      </div>
+      </div>
     </main>
   );
 }
