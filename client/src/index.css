@@ -88,6 +88,7 @@ h1 em, h2 em { color: var(--gold); font-style: italic; }
 .join .eyebrow { color: var(--green-bright); }
 .join h2 { color: var(--paper); font: 500 clamp(52px, 7vw, 94px)/.87 var(--serif); letter-spacing: -.065em; }
 .join-copy { max-width: 405px; margin: 37px auto 30px; color: var(--muted); font: 400 13px/1.6 var(--sans); }
+.clique-highlight { color: var(--green-bright); }
 .signup-form { display: flex; max-width: 490px; margin: auto; border-bottom: 1px solid var(--muted); }
 .signup-form input { min-width: 0; flex: 1; padding: 15px 0; border: 0; outline: 0; color: var(--paper); background: transparent; font: 400 12px var(--mono); }
 .signup-form input::placeholder { color: var(--muted); }
