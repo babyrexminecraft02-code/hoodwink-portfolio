@@ -99,10 +99,15 @@ h1 em, h2 em { color: var(--gold); font-style: italic; }
 .signup-form button:hover { color: var(--paper); transform: translateX(3px); }
 .signup-form button span { margin-left: 8px; font-size: 15px; }
 .success-message { padding: 15px; border: 1px solid var(--green-bright); color: var(--green-bright); font: 400 11px var(--mono); }
-.footer { display: flex; justify-content: space-between; padding: 25px 4.5vw; background: var(--ink); color: var(--muted); border-top: 1px solid rgba(233,229,219,.18); font: 400 9px var(--mono); letter-spacing: .06em; text-transform: uppercase; }
+.footer { display: grid; grid-template-columns: 1fr auto; align-items: start; gap: 32px; padding: 29px 4.5vw 27px; background: var(--ink); color: var(--muted); border-top: 1px solid rgba(233,229,219,.18); font: 400 9px var(--mono); letter-spacing: .06em; text-transform: uppercase; }
 .footer a { color: var(--paper); transition: color .2s ease; }
 .footer a:hover { color: var(--green-bright); }
-.social-links { display: flex; align-items: center; gap: 8px; }
+.footer-brand { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
+.footer-brand > .edit-target:first-child { color: var(--paper); }
+.footer-back { margin-top: 7px; color: var(--muted) !important; }
+.footer-aside { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
+.footer-social-label { color: rgba(233,229,219,.42); font-size: 8px; letter-spacing: .12em; }
+.social-links { display: flex; align-items: center; justify-content: flex-end; gap: 8px; }
 .social-link { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; color: var(--paper) !important; border: 1px solid rgba(233,229,219,.28); border-radius: 50%; transition: color .2s ease, border-color .2s ease, transform .2s var(--ease-out), background .2s ease; }
 .social-link:hover { color: var(--ink) !important; border-color: var(--green-bright); background: var(--green-bright); transform: translateY(-2px); }
 .x-glyph { font: 500 14px/1 var(--sans); text-transform: none; }
@@ -134,8 +139,10 @@ h1 em, h2 em { color: var(--gold); font-style: italic; }
   .join::before, .join::after { font-size: 170px; }
   .join::before { left: 0; }
   .join::after { right: 0; bottom: -70px; }
-  .footer { flex-wrap: wrap; gap: 17px; padding: 22px 8vw; }
-  .social-links { order: 3; width: 100%; }
+  .footer { grid-template-columns: 1fr auto; gap: 24px; padding: 22px 8vw; }
+  .footer-aside { align-items: flex-end; }
+  .footer-social-label { display: none; }
+  .social-links { width: auto; }
 }
 
 
