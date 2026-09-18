@@ -84,13 +84,6 @@ h1 em, h2 em { color: var(--gold); font-style: italic; }
 .manifesto h2 { font: 500 clamp(45px, 7vw, 100px)/.91 var(--serif); letter-spacing: -.065em; }
 
 .join { position: relative; padding: 140px 8vw 125px; background: var(--ink); color: var(--paper); text-align: center; overflow: hidden; }
-.join-fence { position: absolute; z-index: 0; width: 118px; height: 54px; opacity: .42; pointer-events: none; background: repeating-linear-gradient(90deg, transparent 0 13px, rgba(63,163,116,.58) 13px 14px); }
-.join-fence::before { content: ""; position: absolute; inset: 8px 0 auto; height: 37px; border-top: 1px solid rgba(63,163,116,.75); border-bottom: 1px solid rgba(63,163,116,.38); background: repeating-linear-gradient(90deg, transparent 0 10px, rgba(63,163,116,.65) 10px 11px, transparent 11px 20px); clip-path: polygon(0 100%, 0 35%, 7% 35%, 10% 0, 13% 35%, 27% 35%, 30% 0, 33% 35%, 47% 35%, 50% 0, 53% 35%, 67% 35%, 70% 0, 73% 35%, 87% 35%, 90% 0, 93% 35%, 100% 35%, 100% 100%); }
-.join-fence::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: rgba(63,163,116,.55); }
-.join-fence-top-left { top: 48px; left: 8vw; transform: rotate(180deg); }
-.join-fence-top-right { top: 48px; right: 8vw; transform: scaleX(-1) rotate(180deg); }
-.join-fence-bottom-left { bottom: 50px; left: 8vw; }
-.join-fence-bottom-right { right: 8vw; bottom: 50px; transform: scaleX(-1); }
 .join-inner { position: relative; z-index: 1; max-width: 650px; margin: auto; }
 .join .eyebrow { color: var(--green-bright); }
 .join h2 { color: var(--paper); font: 500 clamp(52px, 7vw, 94px)/.87 var(--serif); letter-spacing: -.065em; }
@@ -140,11 +133,6 @@ h1 em, h2 em { color: var(--gold); font-style: italic; }
   .piece-reveal { opacity: 1; transform: none; }
   .manifesto { min-height: 600px; }
   .join { padding: 100px 8vw 90px; }
-  .join-fence { width: 82px; height: 44px; opacity: .34; }
-  .join-fence-top-left { top: 34px; left: 5vw; }
-  .join-fence-top-right { top: 34px; right: 5vw; }
-  .join-fence-bottom-left { bottom: 34px; left: 5vw; }
-  .join-fence-bottom-right { right: 5vw; bottom: 34px; }
   .footer { grid-template-columns: 1fr auto; gap: 18px 24px; padding: 22px 8vw; }
   .footer-note { grid-column: 1 / -1; grid-row: 2; justify-self: center; margin-top: 0; }
   .footer-aside { align-items: flex-end; }
