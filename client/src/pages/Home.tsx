@@ -98,6 +98,7 @@ export default function Home() {
   const [handTool, setHandTool] = useState(false);
   const [showGuides, setShowGuides] = useState(true);
   const [isPanning, setIsPanning] = useState(false);
+  const [activeSection, setActiveSection] = useState("story");
   const fileInputRef = useRef<HTMLInputElement>(null);
   const localFileInputRef = useRef<HTMLInputElement>(null);
   const dragRef = useRef({ id: "", startX: 0, startY: 0, originX: 0, originY: 0 });
@@ -125,6 +126,15 @@ export default function Home() {
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [editMode, state]);
+  useEffect(() => {
+    const sections = Array.from(document.querySelectorAll<HTMLElement>("#story, #drop, #join"));
+    const observer = new IntersectionObserver((entries) => {
+      const visible = entries.filter((entry) => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+      if (visible[0]?.target.id) setActiveSection(visible[0].target.id);
+    }, { rootMargin: "-18% 0px -58% 0px", threshold: [0, 0.25, 0.5, 0.75, 1] });
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, []);
 
   function updateEdit(id: string, patch: EditValue) {
     setState((previous) => ({ ...previous, edits: { ...previous.edits, [id]: { ...previous.edits[id], ...patch } } }));
@@ -287,7 +297,7 @@ export default function Home() {
   return (
     <main className={`site-shell ${editMode ? "is-editing" : ""}`} onPointerMove={(event) => { moveDrag(event); movePanel(event); movePan(event); }} onPointerUp={() => { endDrag(); setPanelDragging(false); setIsPanning(false); }}>
       <header className="nav-wrap">
-        <nav className="desktop-nav" aria-label="Primary navigation"><a href="#story">Manifesto</a><a href="#drop">The drop</a><a href="#join">Early access</a></nav>
+        <nav className="desktop-nav" aria-label="Primary navigation"><a className={activeSection === "story" ? "active" : ""} href="#story" aria-current={activeSection === "story" ? "page" : undefined}>Manifesto</a><a className={activeSection === "drop" ? "active" : ""} href="#drop" aria-current={activeSection === "drop" ? "page" : undefined}>The drop</a><a className={activeSection === "join" ? "active" : ""} href="#join" aria-current={activeSection === "join" ? "page" : undefined}>Early access</a></nav>
         <div className="nav-actions">
           <button className={`edit-toggle ${editMode ? "active" : ""}`} onClick={() => editMode ? closeEditMode() : enterEditMode()}>{editMode ? "Preview" : "Edit mode"}</button>
           <a className="nav-mark" href="#join" aria-label="Join the early access list">↗</a>
