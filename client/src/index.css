@@ -28,8 +28,8 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 2px solid 
 .site-shell { overflow: hidden; background: var(--paper); }
 .nav-wrap { position: absolute; z-index: 5; top: 0; left: 0; right: 0; display: flex; align-items: center; justify-content: space-between; padding: 26px 4.5vw; color: var(--paper); mix-blend-mode: screen; }
 .desktop-nav { display: flex; gap: 31px; margin-left: auto; margin-right: 34px; font: 400 10px var(--mono); letter-spacing: .08em; text-transform: uppercase; }
-.desktop-nav a, .nav-mark { opacity: .82; transition: opacity .2s ease, transform .2s var(--ease-out); }
-.desktop-nav a:hover, .nav-mark:hover { opacity: 1; transform: translateY(-2px); }
+.desktop-nav a, .nav-mark { opacity: .82; will-change: transform, opacity; backface-visibility: hidden; transition: opacity .18s var(--ease-out), transform .18s var(--ease-out); }
+.desktop-nav a:hover, .nav-mark:hover { opacity: 1; transform: translate3d(0, -2px, 0); }
 .nav-mark { font: 500 20px var(--sans); }
 
 .hero { min-height: 100vh; position: relative; display: flex; align-items: center; padding: 145px 9vw 76px; color: var(--paper); background: radial-gradient(circle at 74% 35%, rgba(63,163,116,.2), transparent 22%), radial-gradient(circle at 18% 90%, rgba(168,135,63,.15), transparent 31%), var(--ink); isolation: isolate; }
@@ -42,8 +42,8 @@ h1, h2, h3, p { margin: 0; }
 h1 { color: var(--paper); font: 500 clamp(70px, 11.5vw, 180px)/.82 var(--serif); letter-spacing: -.075em; }
 h1 em, h2 em { color: var(--gold); font-style: italic; }
 .hero-intro { max-width: 340px; margin: 43px 0 28px; color: var(--muted); font: 400 14px/1.55 var(--sans); }
-.text-link { display: inline-flex; align-items: center; gap: 12px; padding-bottom: 9px; border-bottom: 1px solid var(--green-bright); color: var(--paper); opacity: .82; font: 500 11px var(--mono); letter-spacing: .06em; text-transform: uppercase; transition: opacity .2s ease, transform .2s var(--ease-out); }
-.text-link:hover { opacity: 1; transform: translateY(-2px); }
+.text-link { display: inline-flex; align-items: center; gap: 12px; padding-bottom: 9px; border-bottom: 1px solid var(--green-bright); color: var(--paper); opacity: .82; will-change: transform, opacity; backface-visibility: hidden; font: 500 11px var(--mono); letter-spacing: .06em; text-transform: uppercase; transition: opacity .18s var(--ease-out), transform .18s var(--ease-out); }
+.text-link:hover { opacity: 1; transform: translate3d(0, -2px, 0); }
 .text-link b { color: var(--green-bright); font-size: 17px; font-weight: 400; }
 .hero-stamp { position: absolute; right: 13vw; top: 43%; display: grid; width: 178px; height: 178px; place-content: center; gap: 17px; border: 1px solid rgba(168,135,63,.75); border-radius: 50%; color: var(--gold); text-align: center; font: 400 9px/1.35 var(--mono); letter-spacing: .08em; transform: rotate(12deg); animation: float 5s ease-in-out infinite; }
 .stamp-star { font: 25px var(--sans); line-height: .5; }
@@ -90,8 +90,8 @@ h1 em, h2 em { color: var(--gold); font-style: italic; }
 .signup-form { display: flex; max-width: 490px; margin: auto; border-bottom: 1px solid var(--muted); }
 .signup-form input { min-width: 0; flex: 1; padding: 15px 0; border: 0; outline: 0; color: var(--paper); background: transparent; font: 400 12px var(--mono); }
 .signup-form input::placeholder { color: var(--muted); }
-.signup-form button { padding: 15px 0 15px 18px; border: 0; color: var(--green-bright); background: transparent; cursor: pointer; opacity: .82; font: 500 10px var(--mono); letter-spacing: .06em; text-transform: uppercase; transition: opacity .2s ease, transform .2s var(--ease-out); }
-.signup-form button:hover { opacity: 1; transform: translateY(-2px); }
+.signup-form button { padding: 15px 0 15px 18px; border: 0; color: var(--green-bright); background: transparent; cursor: pointer; opacity: .82; will-change: transform, opacity; backface-visibility: hidden; font: 500 10px var(--mono); letter-spacing: .06em; text-transform: uppercase; transition: opacity .18s var(--ease-out), transform .18s var(--ease-out); }
+.signup-form button:hover { opacity: 1; transform: translate3d(0, -2px, 0); }
 .signup-form button span { margin-left: 8px; font-size: 15px; }
 .success-message { padding: 15px; border: 1px solid var(--green-bright); color: var(--green-bright); font: 400 11px var(--mono); }
 .footer { display: grid; grid-template-columns: 1fr auto 1fr; align-items: start; gap: 32px; padding: 29px 4.5vw 27px; background: var(--ink); color: var(--muted); border-top: 1px solid rgba(233,229,219,.18); font: 400 9px var(--mono); letter-spacing: .06em; text-transform: uppercase; }
@@ -99,8 +99,8 @@ h1 em, h2 em { color: var(--gold); font-style: italic; }
 .footer a:hover { color: var(--green-bright); }
 .footer-brand { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
 .footer-brand > .edit-target:first-child { color: var(--paper); }
-.footer-back { margin-top: 7px; color: var(--muted) !important; opacity: .82; transition: opacity .2s ease, transform .2s var(--ease-out), color .2s ease; }
-.footer a.footer-back:hover { color: var(--paper) !important; opacity: 1; transform: translateY(-2px); }
+.footer-back { margin-top: 7px; color: var(--muted) !important; opacity: .82; will-change: transform, opacity; backface-visibility: hidden; transition: opacity .18s var(--ease-out), transform .18s var(--ease-out), color .2s ease; }
+.footer a.footer-back:hover { color: var(--paper) !important; opacity: 1; transform: translate3d(0, -2px, 0); }
 .footer-note { justify-self: center; align-self: center; margin-top: 5px; color: var(--paper); font-family: var(--serif); font-size: 13px; font-style: italic; letter-spacing: .02em; text-transform: none; }
 .footer-aside { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
 .footer-social-label { color: rgba(233,229,219,.42); font-size: 8px; letter-spacing: .12em; }
