@@ -287,7 +287,7 @@ export default function Home() {
   return (
     <main className={`site-shell ${editMode ? "is-editing" : ""}`} onPointerMove={(event) => { moveDrag(event); movePanel(event); movePan(event); }} onPointerUp={() => { endDrag(); setPanelDragging(false); setIsPanning(false); }}>
       <header className="nav-wrap">
-        <nav className="desktop-nav" aria-label="Primary navigation"><a href="#story">The story</a><a href="#drop">The drop</a><a href="#join">Early access</a></nav>
+        <nav className="desktop-nav" aria-label="Primary navigation"><a href="#story">Manifesto</a><a href="#drop">The drop</a><a href="#join">Early access</a></nav>
         <div className="nav-actions">
           <button className={`edit-toggle ${editMode ? "active" : ""}`} onClick={() => editMode ? closeEditMode() : enterEditMode()}>{editMode ? "Preview" : "Edit mode"}</button>
           <a className="nav-mark" href="#join" aria-label="Join the early access list">↗</a>
@@ -336,7 +336,7 @@ export default function Home() {
           <Editable id="hero-intro" label="Hero intro" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag} className="hero-intro" style={styleFor("hero-intro")}>A streetwear label built on the art of the reveal.</Editable>
           <a className="text-link" href="#join"><Editable id="hero-cta" label="Hero CTA" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag}>Get early access</Editable><b>↘</b></a>
         </div>
-        <div className={`hero-stamp ${heroImage ? "has-generated-image" : ""}`} aria-hidden="true" style={heroImage ? { backgroundImage: `url(${heroImage})` } : undefined}><Editable id="hero-stamp-title" label="Stamp title" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag}>THE SECOND<br />READ</Editable><span className="stamp-star">✳</span><Editable id="hero-stamp-footer" label="Stamp footer" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag}>HOODWINK / 01</Editable></div>
+        <div className={`hero-stamp ${heroImage ? "has-generated-image" : ""}`} aria-hidden="true" style={heroImage ? { backgroundImage: `url(${heroImage})` } : undefined}><Editable id="hero-stamp-title" label="Stamp title" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag}>WELCOME TO<br />THE CLIQUE</Editable><span className="stamp-star">✳</span><Editable id="hero-stamp-footer" label="Stamp footer" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag}>KNOW EVERYTHING<br />ABOUT HOODWINK</Editable></div>
         <div className="hero-foot"><Editable id="hero-scroll-label" label="Scroll label" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag}>Scroll to discover</Editable><span className="scroll-line" /></div>
         {editMode && isDragging && <div className="canvas-guides"><span className="guide-x" style={{ left: `${guidePoint.x}%` }} /><span className="guide-y" style={{ top: `${guidePoint.y}%` }} /><span className="guide-label">ALIGN</span></div>}
       </section>
