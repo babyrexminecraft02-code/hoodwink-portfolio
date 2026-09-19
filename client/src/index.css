@@ -90,8 +90,8 @@ h1 em, h2 em { color: var(--gold); font-style: italic; }
 .signup-form { display: flex; max-width: 490px; margin: auto; border-bottom: 1px solid var(--muted); }
 .signup-form input { min-width: 0; flex: 1; padding: 15px 0; border: 0; outline: 0; color: var(--paper); background: transparent; font: 400 12px var(--mono); }
 .signup-form input::placeholder { color: var(--muted); }
-.signup-form button { padding: 15px 0 15px 18px; border: 0; color: var(--green-bright); background: transparent; cursor: pointer; font: 500 10px var(--mono); letter-spacing: .06em; text-transform: uppercase; transition: color .2s ease, transform .2s var(--ease-out); }
-.signup-form button:hover { color: var(--green-bright); transform: translateX(4px); letter-spacing: .1em; }
+.signup-form button { padding: 15px 0 15px 18px; border: 0; color: var(--green-bright); background: transparent; cursor: pointer; opacity: .82; font: 500 10px var(--mono); letter-spacing: .06em; text-transform: uppercase; transition: opacity .2s ease, transform .2s var(--ease-out); }
+.signup-form button:hover { opacity: 1; transform: translateY(-2px); }
 .signup-form button span { margin-left: 8px; font-size: 15px; }
 .success-message { padding: 15px; border: 1px solid var(--green-bright); color: var(--green-bright); font: 400 11px var(--mono); }
 .footer { display: grid; grid-template-columns: 1fr auto 1fr; align-items: start; gap: 32px; padding: 29px 4.5vw 27px; background: var(--ink); color: var(--muted); border-top: 1px solid rgba(233,229,219,.18); font: 400 9px var(--mono); letter-spacing: .06em; text-transform: uppercase; }
