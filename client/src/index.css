@@ -27,8 +27,6 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 2px solid 
 
 .site-shell { overflow: hidden; background: var(--paper); }
 .nav-wrap { position: absolute; z-index: 5; top: 0; left: 0; right: 0; display: flex; align-items: center; justify-content: space-between; padding: 26px 4.5vw; color: var(--paper); mix-blend-mode: screen; }
-.brand-lockup { display: inline-flex; align-items: center; gap: 9px; text-transform: uppercase; font: 500 12px var(--mono); letter-spacing: .1em; }
-.brand-lockup img { width: 24px; height: 24px; object-fit: contain; filter: invert(1); }
 .desktop-nav { display: flex; gap: 31px; margin-left: auto; margin-right: 34px; font: 400 10px var(--mono); letter-spacing: .08em; text-transform: uppercase; }
 .desktop-nav a, .nav-mark { opacity: .82; transition: opacity .2s ease, transform .2s var(--ease-out); }
 .desktop-nav a:hover, .nav-mark:hover { opacity: 1; transform: translateY(-2px); }

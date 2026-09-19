@@ -2,7 +2,6 @@ import { useEffect, useMemo, useRef, useState, type CSSProperties, type FormEven
 import { trpc } from "@/lib/trpc";
 import { AtSign, Facebook, Instagram, Music2 } from "lucide-react";
 
-const logo = "https://framerusercontent.com/images/S0ybpNvVj60i1muQdAggq5HURg.svg?width=1024&height=1024";
 const STORAGE_KEY = "hoodwink-editor-state-v1";
 
 type EditValue = {
@@ -288,7 +287,6 @@ export default function Home() {
   return (
     <main className={`site-shell ${editMode ? "is-editing" : ""}`} onPointerMove={(event) => { moveDrag(event); movePanel(event); movePan(event); }} onPointerUp={() => { endDrag(); setPanelDragging(false); setIsPanning(false); }}>
       <header className="nav-wrap">
-        <a className="brand-lockup" href="#top" aria-label="HoodWink home"><img src={logo} alt="HoodWink" /></a>
         <nav className="desktop-nav" aria-label="Primary navigation"><a href="#story">The story</a><a href="#drop">The drop</a><a href="#join">Early access</a></nav>
         <div className="nav-actions">
           <button className={`edit-toggle ${editMode ? "active" : ""}`} onClick={() => editMode ? closeEditMode() : enterEditMode()}>{editMode ? "Preview" : "Edit mode"}</button>
