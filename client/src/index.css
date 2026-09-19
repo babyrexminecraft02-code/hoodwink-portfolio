@@ -42,8 +42,8 @@ h1, h2, h3, p { margin: 0; }
 h1 { color: var(--paper); font: 500 clamp(70px, 11.5vw, 180px)/.82 var(--serif); letter-spacing: -.075em; }
 h1 em, h2 em { color: var(--gold); font-style: italic; }
 .hero-intro { max-width: 340px; margin: 43px 0 28px; color: var(--muted); font: 400 14px/1.55 var(--sans); }
-.text-link { display: inline-flex; align-items: center; gap: 12px; padding-bottom: 9px; border-bottom: 1px solid var(--green-bright); color: var(--paper); font: 500 11px var(--mono); letter-spacing: .06em; text-transform: uppercase; transition: gap .25s var(--ease-out), color .2s ease; }
-.text-link:hover { gap: 22px; color: var(--green-bright); }
+.text-link { display: inline-flex; align-items: center; gap: 12px; padding-bottom: 9px; border-bottom: 1px solid var(--green-bright); color: var(--paper); opacity: .82; font: 500 11px var(--mono); letter-spacing: .06em; text-transform: uppercase; transition: opacity .2s ease, transform .2s var(--ease-out); }
+.text-link:hover { opacity: 1; transform: translateY(-2px); }
 .text-link b { color: var(--green-bright); font-size: 17px; font-weight: 400; }
 .hero-stamp { position: absolute; right: 13vw; top: 43%; display: grid; width: 178px; height: 178px; place-content: center; gap: 17px; border: 1px solid rgba(168,135,63,.75); border-radius: 50%; color: var(--gold); text-align: center; font: 400 9px/1.35 var(--mono); letter-spacing: .08em; transform: rotate(12deg); animation: float 5s ease-in-out infinite; }
 .stamp-star { font: 25px var(--sans); line-height: .5; }
@@ -99,7 +99,8 @@ h1 em, h2 em { color: var(--gold); font-style: italic; }
 .footer a:hover { color: var(--green-bright); }
 .footer-brand { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
 .footer-brand > .edit-target:first-child { color: var(--paper); }
-.footer-back { margin-top: 7px; color: var(--muted) !important; }
+.footer-back { margin-top: 7px; color: var(--muted) !important; opacity: .82; transition: opacity .2s ease, transform .2s var(--ease-out), color .2s ease; }
+.footer a.footer-back:hover { color: var(--paper) !important; opacity: 1; transform: translateY(-2px); }
 .footer-note { justify-self: center; align-self: center; margin-top: 5px; color: var(--paper); font-family: var(--serif); font-size: 13px; font-style: italic; letter-spacing: .02em; text-transform: none; }
 .footer-aside { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
 .footer-social-label { color: rgba(233,229,219,.42); font-size: 8px; letter-spacing: .12em; }
