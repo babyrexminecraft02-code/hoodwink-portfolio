@@ -58,7 +58,10 @@ h1 em, h2 em { color: var(--gold); font-style: italic; }
 .section-grid { display: grid; grid-template-columns: minmax(150px, 22%) 1fr; gap: 7vw; padding: 150px 9vw; }
 .section-label { display: flex; align-items: flex-start; gap: 13px; color: var(--green); font: 500 10px var(--mono); letter-spacing: .08em; text-transform: uppercase; }
 .section-label span:first-child { color: var(--gold); }
-.story { background: var(--paper); }
+.story { position: relative; background: var(--paper); isolation: isolate; }
+.story::before { content: ""; position: absolute; z-index: -1; left: 7%; top: 23%; width: 42%; height: 54%; pointer-events: none; background: radial-gradient(circle, rgba(63,163,116,.16), transparent 68%); filter: blur(24px); }
+.story .section-label { align-self: center; }
+.story-display { text-shadow: 0 0 22px rgba(63,163,116,.14); }
 .story-content { max-width: 810px; }
 .display-copy { max-width: 750px; font: 500 clamp(35px, 5vw, 70px)/.98 var(--serif); letter-spacing: -.045em; }
 .story-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 10vw; max-width: 680px; margin-top: 76px; color: #59574f; font: 400 14px/1.65 var(--sans); }
@@ -69,6 +72,7 @@ h1 em, h2 em { color: var(--gold); font-style: italic; }
 .drop .section-label { color: var(--paper); }
 .drop .section-label span:first-child { color: var(--green-bright); }
 .drop-heading h2 { font: 500 clamp(46px, 6vw, 82px)/.9 var(--serif); letter-spacing: -.06em; }
+.drop-heading h2 em { color: var(--green-bright); font-style: italic; }
 .drop-heading p { margin-top: 27px; color: rgba(233,229,219,.6); font: 400 13px var(--mono); }
 .pieces-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 19px; padding: 0 4.5vw; }
 .piece-image-wrap { position: relative; aspect-ratio: .83; overflow: hidden; background: #b6ad9c; }
@@ -79,7 +83,7 @@ h1 em, h2 em { color: var(--gold); font-style: italic; }
 .piece:hover .piece-reveal { opacity: 1; transform: translate3d(0, 0, 0); }
 .piece-meta { display: flex; justify-content: space-between; gap: 12px; padding-top: 17px; }
 .piece-meta h3 { font: 500 18px var(--serif); letter-spacing: -.02em; }
-.piece-meta p, .piece-meta strong { margin-top: 5px; color: var(--green-bright); font: 400 10px var(--mono); text-transform: uppercase; letter-spacing: .07em; }
+.piece-meta p, .piece-meta strong { margin-top: 5px; color: var(--green-bright); font: 400 10px/1.55 "Helvetica Neue", Helvetica, Arial, sans-serif; text-transform: uppercase; letter-spacing: .07em; white-space: pre-line; }
 .piece-meta strong { margin-top: 3px; color: var(--paper); font-weight: 400; }
 
 .manifesto { min-height: 78vh; align-items: center; background: var(--paper); }
