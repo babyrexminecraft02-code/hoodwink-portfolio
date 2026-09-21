@@ -100,7 +100,6 @@ export default function Home() {
   const [showGuides, setShowGuides] = useState(true);
   const [isPanning, setIsPanning] = useState(false);
   const [portalReady, setPortalReady] = useState(false);
-  const [activeSection, setActiveSection] = useState("top");
   const fileInputRef = useRef<HTMLInputElement>(null);
   const localFileInputRef = useRef<HTMLInputElement>(null);
   const dragRef = useRef({ id: "", startX: 0, startY: 0, originX: 0, originY: 0 });
@@ -122,16 +121,6 @@ export default function Home() {
       frame = window.requestAnimationFrame(() => setPortalReady(true));
     });
     return () => window.cancelAnimationFrame(frame);
-  }, []);
-  useEffect(() => {
-    const sections = ["top", "story", "drop", "join"].map((id) => document.getElementById(id)).filter(Boolean) as HTMLElement[];
-    if (!sections.length) return;
-    const observer = new IntersectionObserver((entries) => {
-      const visible = entries.filter((entry) => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-      if (visible?.target.id) setActiveSection(visible.target.id);
-    }, { rootMargin: "-30% 0px -55%", threshold: [0, .2, .5, .8] });
-    sections.forEach((section) => observer.observe(section));
-    return () => observer.disconnect();
   }, []);
   useEffect(() => {
     if (!editMode) return;
@@ -312,8 +301,6 @@ export default function Home() {
           <a className="nav-mark" href="#join" aria-label="Join the early access list">↗</a>
         </div>
       </header>
-
-      <aside className="section-rail" aria-label="Page sections"><span className="section-rail-line" aria-hidden="true" /><a className={activeSection === "top" ? "active" : ""} href="#top"><b>00</b><span>Start</span></a><a className={activeSection === "story" ? "active" : ""} href="#story"><b>01</b><span>Manifesto</span></a><a className={activeSection === "drop" ? "active" : ""} href="#drop"><b>02</b><span>The drop</span></a><a className={activeSection === "join" ? "active" : ""} href="#join"><b>03</b><span>Early access</span></a></aside>
 
       {editMode && (
         <aside className={`editor-panel ${panelSide === "left" ? "panel-left" : "panel-right"}`} aria-label="HoodWink edit mode panel" style={{ transform: `translate(${panelPosition.x}px, ${panelPosition.y}px)` }}>
