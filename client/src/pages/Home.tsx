@@ -1,9 +1,9 @@
-import { useEffect, useMemo, useRef, useState, type CSSProperties, type FormEvent, type PointerEvent as ReactPointerEvent, type ReactNode } from "react";
+import { lazy, Suspense, useEffect, useMemo, useRef, useState, type CSSProperties, type FormEvent, type PointerEvent as ReactPointerEvent, type ReactNode } from "react";
 import { trpc } from "@/lib/trpc";
-import { PortalFieldCollection } from "@designcodeio/threeui";
 import { AtSign, Facebook, Instagram, Music2 } from "lucide-react";
 
 const STORAGE_KEY = "hoodwink-editor-state-v1";
+const LazyPortalField = lazy(() => import("@designcodeio/threeui").then(({ PortalFieldCollection }) => ({ default: PortalFieldCollection })));
 
 type EditValue = {
   text?: string;
@@ -99,6 +99,7 @@ export default function Home() {
   const [handTool, setHandTool] = useState(false);
   const [showGuides, setShowGuides] = useState(true);
   const [isPanning, setIsPanning] = useState(false);
+  const [portalReady, setPortalReady] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const localFileInputRef = useRef<HTMLInputElement>(null);
   const dragRef = useRef({ id: "", startX: 0, startY: 0, originX: 0, originY: 0 });
@@ -114,6 +115,12 @@ export default function Home() {
     const loaded = readStoredState();
     setState(loaded);
     setSavedState(loaded);
+  }, []);
+  useEffect(() => {
+    let frame = window.requestAnimationFrame(() => {
+      frame = window.requestAnimationFrame(() => setPortalReady(true));
+    });
+    return () => window.cancelAnimationFrame(frame);
   }, []);
   useEffect(() => {
     if (!editMode) return;
@@ -330,7 +337,7 @@ export default function Home() {
       <div className="canvas-stage" style={{ transform: `translate(${pan.x}px, ${pan.y}px) scale(${zoom})` }}>
       {editMode && showGuides && <div className="persistent-guides" aria-hidden="true"><span className="guide-center-x" /><span className="guide-center-y" /><span className="guide-quarter-x" /><span className="guide-three-quarter-x" /><span className="guide-quarter-y" /><span className="guide-three-quarter-y" /><span className="guide-center-label">CENTER</span></div>}
       <section className="hero" id="top" onClick={(event) => { if (editMode && event.target === event.currentTarget) setSelectedId(null); }}>
-        <div className="hero-portal-field" aria-hidden="true"><PortalFieldCollection mode="dark" speed={0.35} size={1.1} length={1.15} density={0.8} opacity={0.72} hue={145} saturation={0.82} brightness={0.72} /></div>
+        <div className="hero-portal-field" aria-hidden="true">{portalReady && <Suspense fallback={null}><LazyPortalField mode="dark" speed={0.22} size={0.9} length={0.82} density={0.38} opacity={0.56} hue={145} saturation={0.78} brightness={0.62} /></Suspense>}</div>
         <div className="hero-topline"><Editable id="hero-edition" label="Edition label" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag}>EST. 2026</Editable><Editable id="hero-location" label="Location label" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag}>Dhaka / Worldwide</Editable></div>
         <div className="hero-copy">
           <Editable id="hero-eyebrow" label="Hero eyebrow" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag} className="eyebrow" style={styleFor("hero-eyebrow")}>A streetwear label</Editable>
@@ -349,7 +356,7 @@ export default function Home() {
 
       <section className="manifesto section-grid"><div className="section-label"><Editable id="manifesto-index" label="Manifesto section number" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag}>03</Editable><Editable id="manifesto-label" label="Manifesto section label" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag}>In plain sight</Editable></div><div className="manifesto-copy"><Editable id="manifesto" label="Manifesto close" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag}><p>We don&apos;t sell a costume.</p><h2><span className="manifesto-primary">We sell the moment<br />with a touch of Art.</span><span className="manifesto-secondary">We call it<br />Trompe L&apos;oeil.</span></h2></Editable></div></section>
 
-      <section className="join" id="join"><div className="join-inner"><Editable id="join-eyebrow" label="Join eyebrow" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag} className="eyebrow">Know before it drops.</Editable><Editable id="join-title" label="Join title" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag} className="join-title"><h2>No spam.<br /><em>Just the good stuff.</em></h2></Editable><Editable id="join-copy" label="Join description" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag} className="join-copy">No restocks announced twice. Just the exclusives and word. Early, to the people already in the <span className="clique-highlight">Clique</span>.</Editable>{submitted ? <div className="success-message" role="status">You&apos;re in. Keep your eyes open.</div> : <form className="signup-form" onSubmit={handleSubmit}><label className="sr-only" htmlFor="email">Email address</label><input id="email" type="email" required placeholder="Your email address" value={email} onChange={(event) => setEmail(event.target.value)} /><button type="submit">Join the clique <span>↗</span></button></form>}</div><div className="footer-marquee" aria-label="HoodWink brand marquee"><div className="footer-marquee-track" aria-hidden="true"><span>HoodWink</span><span>Trompe L&apos;oeil</span><span>HoodWink</span><span>Trompe L&apos;oeil</span><span>HoodWink</span><span>Trompe L&apos;oeil</span><span>HoodWink</span><span>Trompe L&apos;oeil</span></div></div></section>
+      <section className="join" id="join"><div className="join-inner"><Editable id="join-eyebrow" label="Join eyebrow" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag} className="eyebrow">Know before it drops.</Editable><Editable id="join-title" label="Join title" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag} className="join-title"><h2>No spam.<br /><em>Just the good stuff.</em></h2></Editable><Editable id="join-copy" label="Join description" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag} className="join-copy">No restocks announced twice. Just the exclusives and word. Early, to the people already in the <span className="clique-highlight">Clique</span>.</Editable>{submitted ? <div className="success-message" role="status">You&apos;re in. Keep your eyes open.</div> : <form className="signup-form" onSubmit={handleSubmit}><label className="sr-only" htmlFor="email">Email address</label><input id="email" type="email" required placeholder="Your email address" value={email} onChange={(event) => setEmail(event.target.value)} /><button type="submit">Join the clique <span>↗</span></button></form>}</div><div className="footer-marquee" aria-label="HoodWink logo marquee"><div className="footer-marquee-track" aria-hidden="true">{Array.from({ length: 6 }, (_, index) => <img key={index} src="/manus-storage/2_9c157b12.svg" alt="" />)}</div></div></section>
       <footer className="footer"><div className="footer-brand"><Editable id="footer-mark" label="Footer mark" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag}>HOODWINK / 2026</Editable><a className="footer-back" href="#top"><Editable id="footer-back" label="Footer back link" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag}>Back to top ↑</Editable></a></div><Editable id="footer-note" label="Footer note" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag} className="footer-note">A trick, worn well.</Editable><div className="footer-aside"><span className="footer-social-label">Find us in plain sight</span><div className="social-links" aria-label="HoodWink social links">{socialLinks.map(({ label, href, icon: Icon }) => <a key={label} className="social-link" href={href} target="_blank" rel="noreferrer" aria-label={label} title={label}>{Icon ? <Icon size={15} strokeWidth={1.7} /> : <span className="x-glyph">𝕏</span>}</a>)}</div></div></footer>
       </div>
       </div>
