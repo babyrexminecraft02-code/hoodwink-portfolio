@@ -82,9 +82,13 @@ h1 em, h2 em { color: var(--gold); font-style: italic; }
 .piece-meta p, .piece-meta strong { margin-top: 5px; color: var(--green-bright); font: 400 10px var(--mono); text-transform: uppercase; letter-spacing: .07em; }
 .piece-meta strong { margin-top: 3px; color: var(--paper); font-weight: 400; }
 
-.manifesto { min-height: 78vh; align-items: center; background: var(--paper-deep); }
+.manifesto { min-height: 78vh; align-items: center; background: var(--paper); }
+.manifesto .section-label { align-self: center; }
 .manifesto-copy > p { margin-bottom: 28px; color: var(--green); font: 400 12px var(--mono); text-transform: uppercase; letter-spacing: .1em; }
-.manifesto h2 { font: 500 clamp(45px, 7vw, 100px)/.91 var(--serif); letter-spacing: -.065em; }
+.manifesto h2 { color: var(--ink); font: 500 clamp(45px, 7vw, 100px)/.95 "Helvetica Neue", Helvetica, Arial, sans-serif; letter-spacing: -.045em; }
+.manifesto-primary, .manifesto-secondary { display: block; }
+.manifesto-primary { font-weight: 600; }
+.manifesto-secondary { margin-top: 28px; color: var(--green-bright); font-weight: 400; }
 
 .join { position: relative; padding: 140px 8vw 125px; background: var(--ink); color: var(--paper); text-align: center; overflow: hidden; }
 .join-inner { position: relative; z-index: 1; max-width: 650px; margin: auto; }
