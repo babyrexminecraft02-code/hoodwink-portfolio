@@ -73,7 +73,7 @@ h1 em, h2 em { color: var(--gold); font-style: italic; }
 .drop .section-label span:first-child { color: var(--green-bright); }
 .drop-heading h2 { font: 500 clamp(46px, 6vw, 82px)/.9 var(--serif); letter-spacing: -.06em; }
 .drop-heading h2 em { color: var(--green-bright); font-style: italic; }
-.drop-heading p { margin-top: 27px; color: rgba(233,229,219,.6); font: 400 13px var(--mono); }
+.drop-heading p { margin-top: 27px; color: rgba(233,229,219,.6); font: 400 12px var(--mono); text-transform: uppercase; letter-spacing: .1em; }
 .pieces-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 19px; padding: 0 4.5vw; }
 .piece-image-wrap { position: relative; aspect-ratio: .83; overflow: hidden; background: #b6ad9c; }
 .piece-image { position: relative; top: -3.5%; width: 100%; height: 103.5%; object-fit: cover; object-position: center center; display: block; filter: saturate(.78) contrast(.96); transition: transform .65s var(--ease-out), filter .35s ease; }
