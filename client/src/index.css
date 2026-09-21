@@ -32,7 +32,11 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 2px solid 
 .desktop-nav a:hover, .nav-mark:hover { opacity: 1; transform: translate3d(0, -2px, 0); }
 .nav-mark { font: 500 20px var(--sans); }
 
-.hero { min-height: 100vh; position: relative; display: flex; align-items: center; padding: 145px 9vw 76px; color: var(--paper); background: radial-gradient(circle at 74% 35%, rgba(63,163,116,.2), transparent 22%), radial-gradient(circle at 18% 90%, rgba(168,135,63,.15), transparent 31%), var(--ink); isolation: isolate; }
+.hero { min-height: 100vh; position: relative; display: flex; align-items: center; padding: 145px 9vw 76px; color: var(--paper); background: var(--ink); isolation: isolate; }
+.hero-portal-field { position: absolute; z-index: 0; inset: 0; overflow: hidden; pointer-events: none; opacity: .86; mix-blend-mode: screen; }
+.hero-portal-field > .threeui-background { position: absolute; inset: 0; width: 100%; height: 100%; min-width: 0; min-height: 0; }
+.hero-portal-field canvas { display: block; width: 100% !important; height: 100% !important; }
+.hero > *:not(.hero-portal-field) { position: relative; z-index: 1; }
 .hero::before { content: ""; position: absolute; inset: 0; z-index: -1; opacity: .2; pointer-events: none; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.22'/%3E%3C/svg%3E"); mix-blend-mode: soft-light; }
 .hero::after { content: ""; position: absolute; inset: 11% 4.5% 8%; border: 1px solid rgba(233,229,219,.14); pointer-events: none; }
 .hero-topline { position: absolute; top: 105px; left: 9vw; right: 9vw; display: flex; justify-content: space-between; color: var(--muted); text-transform: uppercase; font: 400 9px var(--mono); letter-spacing: .1em; }

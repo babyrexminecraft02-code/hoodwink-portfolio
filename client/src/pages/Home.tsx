@@ -1,5 +1,7 @@
 import { useEffect, useMemo, useRef, useState, type CSSProperties, type FormEvent, type PointerEvent as ReactPointerEvent, type ReactNode } from "react";
 import { trpc } from "@/lib/trpc";
+import { PortalFieldCollection } from "@designcodeio/threeui";
+import "@designcodeio/threeui/style.css";
 import { AtSign, Facebook, Instagram, Music2 } from "lucide-react";
 
 const STORAGE_KEY = "hoodwink-editor-state-v1";
@@ -329,6 +331,7 @@ export default function Home() {
       <div className="canvas-stage" style={{ transform: `translate(${pan.x}px, ${pan.y}px) scale(${zoom})` }}>
       {editMode && showGuides && <div className="persistent-guides" aria-hidden="true"><span className="guide-center-x" /><span className="guide-center-y" /><span className="guide-quarter-x" /><span className="guide-three-quarter-x" /><span className="guide-quarter-y" /><span className="guide-three-quarter-y" /><span className="guide-center-label">CENTER</span></div>}
       <section className="hero" id="top" onClick={(event) => { if (editMode && event.target === event.currentTarget) setSelectedId(null); }}>
+        <div className="hero-portal-field" aria-hidden="true"><PortalFieldCollection mode="dark" speed={0.35} size={1.1} length={1.15} density={0.8} opacity={0.72} hue={145} saturation={0.82} brightness={0.72} /></div>
         <div className="hero-topline"><Editable id="hero-edition" label="Edition label" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag}>EST. 2026</Editable><Editable id="hero-location" label="Location label" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag}>Dhaka / Worldwide</Editable></div>
         <div className="hero-copy">
           <Editable id="hero-eyebrow" label="Hero eyebrow" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag} className="eyebrow" style={styleFor("hero-eyebrow")}>A streetwear label</Editable>
