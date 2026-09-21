@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useRef, useState, type CSSProperties, type FormEvent, type PointerEvent as ReactPointerEvent, type ReactNode } from "react";
 import { trpc } from "@/lib/trpc";
 import { PortalFieldCollection } from "@designcodeio/threeui";
-import "@designcodeio/threeui/style.css";
 import { AtSign, Facebook, Instagram, Music2 } from "lucide-react";
 
 const STORAGE_KEY = "hoodwink-editor-state-v1";
