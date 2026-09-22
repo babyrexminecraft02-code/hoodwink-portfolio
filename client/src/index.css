@@ -33,13 +33,12 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 2px solid 
 .nav-mark { font: 500 20px var(--sans); }
 
 .hero { min-height: 100vh; position: relative; display: flex; align-items: center; padding: 145px 9vw 76px; color: var(--paper); background: var(--ink); isolation: isolate; }
-.hero-portal-field { position: absolute; z-index: 0; inset: 0; overflow: hidden; pointer-events: none; opacity: .72; mix-blend-mode: screen; contain: strict; }
-.hero-portal-field::before, .hero-portal-field::after { content: ""; position: absolute; pointer-events: none; border-radius: 50%; will-change: transform; }
-.hero-portal-field::before { width: 125%; height: 145%; left: -12%; top: -22%; background: radial-gradient(ellipse at 52% 51%, transparent 0 17%, rgba(63,163,116,.2) 17.3% 17.6%, transparent 18% 28%, rgba(63,163,116,.14) 28.3% 28.6%, transparent 29% 40%, rgba(168,135,63,.11) 40.3% 40.6%, transparent 41% 53%, rgba(63,163,116,.08) 53.3% 53.6%, transparent 54%), radial-gradient(ellipse at 52% 51%, rgba(63,163,116,.12), transparent 48%); animation: portal-drift 18s ease-in-out infinite alternate; }
-.hero-portal-field::after { width: 86%; height: 98%; left: 16%; top: 3%; background: radial-gradient(ellipse at center, transparent 0 31%, rgba(233,229,219,.07) 31.4% 31.7%, transparent 32.1% 48%, rgba(63,163,116,.1) 48.4% 48.7%, transparent 49.1%), radial-gradient(ellipse at center, transparent 0 44%, rgba(168,135,63,.08) 44.4% 44.7%, transparent 45.1%); transform: rotate(-12deg); animation: portal-drift-reverse 24s ease-in-out infinite alternate; }
+.hero-portal-field { position: absolute; z-index: 0; inset: 0; overflow: hidden; pointer-events: none; opacity: .86; mix-blend-mode: screen; contain: strict; }
+.hero-portal-field > .threeui-background { position: absolute; inset: 0; width: 100%; height: 100%; min-width: 0; min-height: 0; overflow: hidden; contain: strict; }
+.hero-portal-field canvas { display: block; width: 100% !important; height: 100% !important; transform: translateZ(0); backface-visibility: hidden; }
 .hero-topline, .hero-stamp, .hero-foot { z-index: 1; }
 .hero-copy { position: relative; z-index: 1; }
-.hero::before { content: ""; position: absolute; inset: 0; z-index: -1; opacity: .2; pointer-events: none; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.22'/%3E%3C/svg%3E"); mix-blend-mode: soft-light; }
+.hero::before { content: ""; position: absolute; inset: 0; z-index: -1; opacity: .14; pointer-events: none; background: radial-gradient(circle at 52% 48%, rgba(63,163,116,.08), transparent 42%); }
 .hero::after { content: ""; position: absolute; inset: 11% 4.5% 8%; border: 1px solid rgba(233,229,219,.14); pointer-events: none; }
 .hero-topline { position: absolute; top: 105px; left: 9vw; right: 9vw; display: flex; justify-content: space-between; color: var(--muted); text-transform: uppercase; font: 400 9px var(--mono); letter-spacing: .1em; }
 .hero-copy { max-width: 750px; animation: enter .8s var(--ease-out) both; }
@@ -131,8 +130,6 @@ h1 em, h2 em { color: var(--gold); font-style: italic; }
 @keyframes enter { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes float { 0%, 100% { translate: 0 0; } 50% { translate: 0 -10px; } }
 @keyframes pulse { 0%, 100% { opacity: .4; transform: scaleX(.6); } 50% { opacity: 1; transform: scaleX(1); } }
-@keyframes portal-drift { from { transform: translate3d(-2%, -1%, 0) rotate(-2deg) scale(1); } to { transform: translate3d(2%, 1%, 0) rotate(2deg) scale(1.04); } }
-@keyframes portal-drift-reverse { from { transform: rotate(-12deg) scale(1); } to { transform: rotate(-7deg) scale(1.04); } }
 @keyframes footer-marquee-slide { to { transform: translate3d(-50%, 0, 0); } }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; } }
 @media (max-width: 760px) {
