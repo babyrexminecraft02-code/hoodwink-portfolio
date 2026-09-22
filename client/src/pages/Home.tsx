@@ -1,9 +1,8 @@
-import { lazy, Suspense, useEffect, useMemo, useRef, useState, type CSSProperties, type FormEvent, type PointerEvent as ReactPointerEvent, type ReactNode } from "react";
+import { useEffect, useMemo, useRef, useState, type CSSProperties, type FormEvent, type PointerEvent as ReactPointerEvent, type ReactNode } from "react";
 import { trpc } from "@/lib/trpc";
 import { AtSign, Facebook, Instagram, Music2 } from "lucide-react";
 
 const STORAGE_KEY = "hoodwink-editor-state-v1";
-const LazyPortalField = lazy(() => import("@designcodeio/threeui").then(({ PortalFieldCollection }) => ({ default: PortalFieldCollection })));
 
 type EditValue = {
   text?: string;
@@ -99,7 +98,6 @@ export default function Home() {
   const [handTool, setHandTool] = useState(false);
   const [showGuides, setShowGuides] = useState(true);
   const [isPanning, setIsPanning] = useState(false);
-  const [portalReady, setPortalReady] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const localFileInputRef = useRef<HTMLInputElement>(null);
   const dragRef = useRef({ id: "", startX: 0, startY: 0, originX: 0, originY: 0 });
@@ -115,12 +113,6 @@ export default function Home() {
     const loaded = readStoredState();
     setState(loaded);
     setSavedState(loaded);
-  }, []);
-  useEffect(() => {
-    let frame = window.requestAnimationFrame(() => {
-      frame = window.requestAnimationFrame(() => setPortalReady(true));
-    });
-    return () => window.cancelAnimationFrame(frame);
   }, []);
   useEffect(() => {
     if (!editMode) return;
@@ -337,7 +329,7 @@ export default function Home() {
       <div className="canvas-stage" style={{ transform: `translate(${pan.x}px, ${pan.y}px) scale(${zoom})` }}>
       {editMode && showGuides && <div className="persistent-guides" aria-hidden="true"><span className="guide-center-x" /><span className="guide-center-y" /><span className="guide-quarter-x" /><span className="guide-three-quarter-x" /><span className="guide-quarter-y" /><span className="guide-three-quarter-y" /><span className="guide-center-label">CENTER</span></div>}
       <section className="hero" id="top" onClick={(event) => { if (editMode && event.target === event.currentTarget) setSelectedId(null); }}>
-        <div className="hero-portal-field" aria-hidden="true">{portalReady && <Suspense fallback={null}><LazyPortalField mode="dark" speed={0.22} size={0.9} length={0.82} density={0.38} opacity={0.56} hue={145} saturation={0.78} brightness={0.62} /></Suspense>}</div>
+        <div className="hero-portal-field" aria-hidden="true" />
         <div className="hero-topline"><Editable id="hero-edition" label="Edition label" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag}>EST. 2026</Editable><Editable id="hero-location" label="Location label" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag}>Dhaka / Worldwide</Editable></div>
         <div className="hero-copy">
           <Editable id="hero-eyebrow" label="Hero eyebrow" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag} className="eyebrow" style={styleFor("hero-eyebrow")}>A streetwear label</Editable>
