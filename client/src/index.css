@@ -54,8 +54,10 @@ h1 em, h2 em { color: var(--gold); font-style: italic; }
 .text-link b { color: var(--green-bright); font-size: 17px; font-weight: 400; }
 .hero-stamp { position: absolute; right: 10vw; top: 47%; display: grid; width: 178px; height: 178px; place-content: center; gap: 17px; border: 1px solid rgba(168,135,63,.75); border-radius: 50%; color: var(--gold); text-align: center; font: 400 9px/1.35 var(--mono); letter-spacing: .08em; transform: rotate(12deg); animation: float 5s ease-in-out infinite; }
 .stamp-star { font: 25px var(--sans); line-height: .5; }
-.hero-foot { position: absolute; bottom: 27px; left: 9vw; display: flex; align-items: center; gap: 14px; color: var(--muted); font: 400 9px var(--mono); letter-spacing: .06em; text-transform: uppercase; }
+.hero-cta { position: absolute; z-index: 1; top: calc(47% + 205px); right: calc(10vw + 8px); }
+.hero-foot { position: absolute; bottom: 27px; left: 50%; display: flex; align-items: center; gap: 14px; color: var(--muted); font: 400 9px var(--mono); letter-spacing: .06em; text-transform: uppercase; transform: translateX(-50%); }
 .scroll-line { display: inline-block; width: 70px; height: 1px; background: var(--muted); transform-origin: left; animation: pulse 2.2s ease-in-out infinite; }
+.scroll-line-left { transform-origin: right; }
 
 .section-grid { display: grid; grid-template-columns: minmax(150px, 22%) 1fr; gap: 7vw; padding: 150px 9vw; }
 .section-label { display: flex; align-items: flex-start; gap: 13px; color: var(--green); font: 500 10px var(--mono); letter-spacing: .08em; text-transform: uppercase; }
@@ -137,14 +139,14 @@ h1 em, h2 em { color: var(--gold); font-style: italic; }
 @media (max-width: 760px) {
   .nav-wrap { padding: 20px 6vw; }
   .desktop-nav { display: none; }
-  .hero { min-height: 760px; padding: 125px 10vw 70px; align-items: flex-start; }
+  .hero { min-height: 760px; padding: 160px 10vw 100px; align-items: flex-start; }
   .hero::after { inset: 85px 6vw 30px; }
-  .hero-topline { top: 76px; left: 10vw; right: 10vw; }
+  .hero-topline { top: 100px; left: 10vw; right: 10vw; }
   h1 { font-size: clamp(67px, 18vw, 125px); }
   .hero-intro { margin-top: 36px; }
   .hero-stamp { right: 8vw; top: auto; bottom: 112px; width: 125px; height: 125px; font-size: 7px; gap: 11px; }
   .stamp-star { font-size: 18px; }
-  .hero-foot { left: 10vw; }
+  .hero-cta { top: auto; right: 8vw; bottom: 70px; }
   .section-grid { grid-template-columns: 1fr; gap: 48px; padding: 91px 8vw; }
   .story-columns { grid-template-columns: 1fr; gap: 24px; margin-top: 43px; }
   .drop { padding-bottom: 98px; }

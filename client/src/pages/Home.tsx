@@ -289,42 +289,8 @@ export default function Home() {
     <main className={`site-shell ${editMode ? "is-editing" : ""}`} onPointerMove={(event) => { moveDrag(event); movePanel(event); movePan(event); }} onPointerUp={() => { endDrag(); setPanelDragging(false); setIsPanning(false); }}>
       <header className="nav-wrap">
         <nav className="desktop-nav" aria-label="Primary navigation"><a href="#story">Manifesto</a><a href="#drop">The drop</a><a href="#join">Early access</a></nav>
-        <div className="nav-actions">
-          <button className={`edit-toggle ${editMode ? "active" : ""}`} onClick={() => editMode ? closeEditMode() : enterEditMode()}>{editMode ? "Preview" : "Edit mode"}</button>
-          <a className="nav-mark" href="#join" aria-label="Join the early access list">↗</a>
-        </div>
+        <div className="nav-actions"><a className="nav-mark" href="#join" aria-label="Join the early access list">↗</a></div>
       </header>
-
-      {editMode && (
-        <aside className={`editor-panel ${panelSide === "left" ? "panel-left" : "panel-right"}`} aria-label="HoodWink edit mode panel" style={{ transform: `translate(${panelPosition.x}px, ${panelPosition.y}px)` }}>
-          <div className="editor-panel-head" onPointerDown={startPanelDrag}><div><span className="panel-kicker">HoodWink / Studio</span><h2>Edit mode</h2><small className="drag-hint">Drag window to reposition</small></div><div className="panel-head-actions"><button className="panel-side-switch" onClick={() => { setPanelSide((side) => side === "right" ? "left" : "right"); setPanelPosition({ x: 0, y: 0 }); }} aria-label="Switch editor side">{panelSide === "right" ? "←" : "→"}</button><button className="panel-close" onClick={closeEditMode} aria-label="Close edit mode">×</button></div></div>
-          <div className="editor-tabs"><button className={canvasTab === "site" ? "active" : ""} onClick={() => setCanvasTab("site")}>Canvas</button><button className={canvasTab === "edit" ? "active" : ""} onClick={() => setCanvasTab("edit")}>AI edit</button></div>
-          {canvasTab === "site" ? (
-            <>
-              <div className="canvas-tools"><button className={`tool-button ${handTool ? "active" : ""}`} onClick={() => setHandTool((value) => !value)} aria-label="Toggle hand pan tool">☝ <span>Hand</span></button><label className="zoom-control">Zoom <output>{Math.round(zoom * 100)}%</output><input type="range" min=".75" max="1.75" step=".05" value={zoom} onChange={(event) => setZoom(Number(event.target.value))} /></label><button className={`tool-button ${showGuides ? "active" : ""}`} onClick={() => setShowGuides((value) => !value)}>Guides</button><button className="tool-button" onClick={resetCanvasView}>Reset view</button></div>
-              <div className="selection-card"><span className="panel-kicker">Selected element</span><strong>{selectedLabel}</strong><small>{selectedId ? "Drag directly on canvas to move" : "Click any outlined element or layer"}</small></div>
-              <div className="control-section"><div className="control-title">Type</div><label>Font<select value={currentEdit.fontFamily ?? ""} onChange={(event) => selectedId && updateEdit(selectedId, { fontFamily: event.target.value || undefined })}><option value="">Original font</option>{fontOptions.map((font) => <option value={font.value} key={font.value}>{font.label}</option>)}</select></label><label className="range-label">Size <output>{currentEdit.fontSize ?? "Auto"}{currentEdit.fontSize ? " px" : ""}</output><input className="range-input" type="range" min="8" max="180" step="1" value={currentEdit.fontSize ?? 48} onChange={(event) => selectedId && updateEdit(selectedId, { fontSize: Number(event.target.value) })} /></label><label className="range-label">Tracking <output>{currentEdit.letterSpacing ?? 0} px</output><input className="range-input" type="range" min="-4" max="30" step=".5" value={currentEdit.letterSpacing ?? 0} onChange={(event) => selectedId && updateEdit(selectedId, { letterSpacing: Number(event.target.value) })} /></label></div>
-              <div className="control-section"><div className="control-title">Colour</div><div className="color-row"><input type="color" value={currentEdit.color ?? "#e9e5db"} onChange={(event) => selectedId && updateEdit(selectedId, { color: event.target.value })} /><input className="color-text" value={currentEdit.color ?? "#e9e5db"} onChange={(event) => selectedId && updateEdit(selectedId, { color: event.target.value })} /></div></div>
-              <div className="control-section"><div className="control-title">Assets</div><button className="editor-button secondary" onClick={() => fileInputRef.current?.click()}>＋ Add local image</button><input ref={fileInputRef} className="file-input" type="file" accept="image/*" onChange={handleLocalFile} /><button className="editor-button secondary" onClick={() => localFileInputRef.current?.click()}>＋ Add local file</button><input ref={localFileInputRef} className="file-input" type="file" onChange={handleLocalAnyFile} /><button className="editor-button secondary" onClick={exportState}>↓ Export edit file</button></div>
-              <div className="control-section edit-history"><div className="control-title">Edit history</div>{history.length ? history.slice().reverse().map((id, index) => <div className="history-item" key={`${id}-${index}`}><span className="history-dot" />{id.replaceAll("-", " ")}</div>) : <small>No edits in this session.</small>}</div>
-              <div className="editor-footer-actions"><button className="editor-button primary" onClick={saveState}>{saved ? "Saved ✓" : "Save edits"}</button><button className="text-button" onClick={resetState}>Reset</button></div>
-              <p className="panel-note">Your edits are stored locally in this browser. Export the edit file to keep a portable backup.</p>
-            </>
-          ) : (
-            <>
-              <div className="ai-intro"><span className="ai-spark">✦</span><div><strong>Describe the change.</strong><p>AI can rewrite copy, restyle the selected element, or make a new image.</p></div></div>
-              <textarea className="prompt-box" value={prompt} onChange={(event) => setPrompt(event.target.value)} placeholder="Make the hero headline more mysterious…" rows={5} />
-              <button className="editor-button primary ai-button" onClick={applyAiEdit} disabled={isBusy || !prompt.trim()}>{assist.isPending ? "Thinking…" : "Apply AI edit"}<span>↗</span></button>
-              <button className="editor-button secondary ai-button" onClick={createAiImage} disabled={isBusy || !prompt.trim()}>{generate.isPending ? "Creating image…" : "Generate image from prompt"}<span>✦</span></button>
-              <div className="prompt-examples"><span>Try a prompt</span><button onClick={() => setPrompt("Rewrite this headline to feel more enigmatic, keep it under 7 words")}>Rewrite headline</button><button onClick={() => setPrompt("Make this element feel warmer with an ochre editorial colour")}>Warm the colour</button><button onClick={() => setPrompt("Create an editorial fashion campaign image with deep green shadows and flash photography")}>Generate campaign image</button></div>
-              {(assist.error || generate.error) && <p className="error-note">{assist.error?.message ?? generate.error?.message ?? "Something went wrong."}</p>}
-              <p className="panel-note">AI actions use the project&apos;s secure server connection. Image generation may take a few seconds.</p>
-            </>
-          )}
-          <button className="help-link" onClick={() => setShowHelp((value) => !value)}>⌘ How edit mode works</button>
-          {showHelp && <div className="help-card">Select an element by clicking it. Drag to move it; the center guides help you align the composition. Use Canvas for precise type and colour controls. Use AI edit for natural-language changes.</div>}
-        </aside>
-      )}
 
       <div className={`canvas-viewport ${handTool ? "hand-enabled" : ""} ${isPanning ? "is-panning" : ""}`} onPointerDown={startPan}>
       <div className="canvas-stage" style={{ transform: `translate(${pan.x}px, ${pan.y}px) scale(${zoom})` }}>
@@ -336,10 +302,10 @@ export default function Home() {
           <Editable id="hero-eyebrow" label="Hero eyebrow" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag} className="eyebrow" style={styleFor("hero-eyebrow")}>A streetwear label</Editable>
           <Editable id="hero-title" label="Hero title" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag} className="hero-title" style={styleFor("hero-title")}>Built on<br /><em>the art of the reveal.</em></Editable>
           <Editable id="hero-intro" label="Hero intro" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag} className="hero-intro" style={styleFor("hero-intro")}>A streetwear label built on the art of the reveal.</Editable>
-          <a className="text-link" href="#join"><Editable id="hero-cta" label="Hero CTA" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag}>Get early access</Editable><b>↘</b></a>
         </div>
         <div className={`hero-stamp ${heroImage ? "has-generated-image" : ""}`} aria-hidden="true" style={heroImage ? { backgroundImage: `url(${heroImage})` } : undefined}><Editable id="hero-stamp-title" label="Stamp title" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag}>WELCOME TO<br />THE CLIQUE</Editable><span className="stamp-star">✳</span><Editable id="hero-stamp-footer" label="Stamp footer" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag}>KNOW EVERYTHING<br />ABOUT HOODWINK</Editable></div>
-        <div className="hero-foot"><Editable id="hero-scroll-label" label="Scroll label" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag}>Scroll to discover</Editable><span className="scroll-line" /></div>
+        <a className="text-link hero-cta" href="#join"><Editable id="hero-cta" label="Hero CTA" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag}>Get early access</Editable><b>↘</b></a>
+        <div className="hero-foot"><span className="scroll-line scroll-line-left" /><Editable id="hero-scroll-label" label="Scroll label" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag}>Scroll to discover</Editable><span className="scroll-line" /></div>
         {editMode && isDragging && <div className="canvas-guides"><span className="guide-x" style={{ left: `${guidePoint.x}%` }} /><span className="guide-y" style={{ top: `${guidePoint.y}%` }} /><span className="guide-label">ALIGN</span></div>}
       </section>
 
