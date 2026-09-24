@@ -49,14 +49,16 @@ h1, h2, h3, p { margin: 0; }
 h1 { color: var(--paper); font: 500 clamp(70px, 11.5vw, 180px)/.82 var(--serif); letter-spacing: -.075em; }
 h1 em, h2 em { color: var(--gold); font-style: italic; }
 .hero-intro { max-width: 340px; margin: 43px 0 28px; color: var(--muted); font: 400 14px/1.55 var(--sans); }
-.text-link { display: inline-flex; align-items: center; gap: 12px; padding-bottom: 9px; border-bottom: 1px solid var(--green-bright); color: var(--paper); opacity: .82; will-change: transform, opacity; backface-visibility: hidden; font: 500 11px var(--mono); letter-spacing: .06em; text-transform: uppercase; transition: opacity .18s var(--ease-out), transform .18s var(--ease-out); }
-.text-link:hover { opacity: 1; transform: translate3d(0, -2px, 0); }
+.text-link { display: inline-flex; align-items: center; gap: 12px; padding-bottom: 9px; border-bottom: 1px solid var(--green-bright); color: var(--paper); opacity: .82; will-change: opacity; backface-visibility: hidden; font: 500 11px var(--mono); letter-spacing: .06em; text-transform: uppercase; transition: opacity .18s var(--ease-out); }
+.text-link:hover { opacity: 1; }
+.hero-cta > span { display: inline-block; transition: transform .18s var(--ease-out); }
+.hero-cta:hover > span { transform: translate3d(0, -2px, 0); }
 .text-link b { color: var(--green-bright); font-size: 17px; font-weight: 400; }
 .hero-stamp { position: absolute; right: 10vw; top: 47%; display: grid; width: 178px; height: 178px; place-content: center; gap: 17px; border: 1px solid rgba(168,135,63,.75); border-radius: 50%; color: var(--gold); text-align: center; font: 400 9px/1.35 var(--mono); letter-spacing: .08em; transform: rotate(12deg); animation: float 5s ease-in-out infinite; }
 .stamp-star { font: 25px var(--sans); line-height: .5; }
 .hero-cta { position: absolute; z-index: 1; top: calc(47% + 205px); right: calc(10vw + 8px); }
-.hero-foot { position: absolute; bottom: 27px; left: 50%; display: flex; align-items: center; gap: 14px; color: var(--muted); font: 400 9px var(--mono); letter-spacing: .06em; text-transform: uppercase; transform: translateX(-50%); }
-.scroll-line { display: inline-block; width: 70px; height: 1px; background: var(--muted); transform-origin: left; animation: pulse 2.2s ease-in-out infinite; }
+.hero-foot { position: absolute; bottom: 27px; left: 50%; display: flex; align-items: center; gap: 16px; color: var(--muted); font: 400 9px var(--mono); letter-spacing: .06em; text-transform: uppercase; transform: translateX(-50%); white-space: nowrap; }
+.scroll-line { display: inline-block; width: 70px; height: 1px; flex: 0 0 70px; background: var(--muted); transform-origin: left; animation: pulse 2.2s ease-in-out infinite; }
 .scroll-line-left { transform-origin: right; }
 
 .section-grid { display: grid; grid-template-columns: minmax(150px, 22%) 1fr; gap: 7vw; padding: 150px 9vw; }
@@ -138,15 +140,19 @@ h1 em, h2 em { color: var(--gold); font-style: italic; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; } }
 @media (max-width: 760px) {
   .nav-wrap { padding: 20px 6vw; }
-  .desktop-nav { display: none; }
-  .hero { min-height: 760px; padding: 160px 10vw 100px; align-items: flex-start; }
-  .hero::after { inset: 85px 6vw 30px; }
-  .hero-topline { top: 100px; left: 10vw; right: 10vw; }
+  .desktop-nav { display: flex; gap: 10px; margin-right: 12px; font-size: 8px; letter-spacing: .04em; }
+  .nav-actions { gap: 8px; }
+  .nav-mark { font-size: 17px; }
+  .hero { min-height: 760px; padding: 135px 10vw 105px; align-items: flex-start; }
+  .hero::after { inset: 55px 6vw 70px; }
+  .hero-topline { top: 75px; left: 10vw; right: 10vw; }
   h1 { font-size: clamp(67px, 18vw, 125px); }
   .hero-intro { margin-top: 36px; }
-  .hero-stamp { right: 8vw; top: auto; bottom: 112px; width: 125px; height: 125px; font-size: 7px; gap: 11px; }
+  .hero-stamp { right: 8vw; top: auto; bottom: 145px; width: 125px; height: 125px; font-size: 7px; gap: 11px; }
   .stamp-star { font-size: 18px; }
-  .hero-cta { top: auto; right: 8vw; bottom: 70px; }
+  .hero-cta { top: auto; right: 8vw; bottom: 102px; }
+  .hero-foot { bottom: 12px; gap: 10px; }
+  .scroll-line { width: 54px; flex-basis: 54px; }
   .section-grid { grid-template-columns: 1fr; gap: 48px; padding: 91px 8vw; }
   .story-columns { grid-template-columns: 1fr; gap: 24px; margin-top: 43px; }
   .drop { padding-bottom: 98px; }
