@@ -143,9 +143,9 @@ h1 em, h2 em { color: var(--gold); font-style: italic; }
   .desktop-nav { display: flex; gap: 10px; margin-right: 12px; font-size: 8px; letter-spacing: .04em; }
   .nav-actions { gap: 8px; }
   .nav-mark { font-size: 17px; }
-  .hero { min-height: 760px; padding: 135px 10vw 105px; align-items: flex-start; }
-  .hero::after { inset: 55px 6vw 70px; }
-  .hero-topline { top: 75px; left: 10vw; right: 10vw; }
+  .hero { min-height: 760px; padding: 150px 10vw 105px; align-items: flex-start; }
+  .hero::after { inset: 70px 6vw 70px; }
+  .hero-topline { top: 90px; left: 10vw; right: 10vw; }
   h1 { font-size: clamp(67px, 18vw, 125px); }
   .hero-intro { margin-top: 36px; }
   .hero-stamp { right: 8vw; top: auto; bottom: 145px; width: 125px; height: 125px; font-size: 7px; gap: 11px; }
