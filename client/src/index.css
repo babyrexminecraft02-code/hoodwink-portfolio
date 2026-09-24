@@ -151,7 +151,7 @@ h1 em, h2 em { color: var(--gold); font-style: italic; }
   .hero-stamp { right: 8vw; top: auto; bottom: 145px; width: 125px; height: 125px; font-size: 7px; gap: 11px; }
   .stamp-star { font-size: 18px; }
   .hero-cta { top: auto; right: 8vw; bottom: 102px; }
-  .hero-foot { bottom: 12px; gap: 10px; }
+  .hero-foot { bottom: 22px; gap: 10px; }
   .scroll-line { width: 54px; flex-basis: 54px; }
   .section-grid { grid-template-columns: 1fr; gap: 48px; padding: 91px 8vw; }
   .story-columns { grid-template-columns: 1fr; gap: 24px; margin-top: 43px; }
@@ -290,7 +290,7 @@ h1 em, h2 em { color: var(--gold); font-style: italic; }
 .zoom-control input::-moz-range-thumb { width: 11px; height: 11px; border: 2px solid var(--ink); border-radius: 50%; background: var(--green-bright); }
 .canvas-tools .tool-button:nth-of-type(2) { grid-column: 1; }
 .canvas-tools .tool-button:nth-of-type(3) { grid-column: 2; }
-.canvas-viewport { position: relative; min-height: 100vh; overflow: hidden; touch-action: none; }
+.canvas-viewport { position: relative; min-height: 100vh; overflow: visible; touch-action: auto; }
 .canvas-stage { position: relative; transform-origin: center top; transition: transform .18s var(--ease-out); will-change: transform; }
 .hand-enabled { cursor: grab; }
 .hand-enabled .edit-target { cursor: grab; }
