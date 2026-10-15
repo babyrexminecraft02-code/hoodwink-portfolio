@@ -35,10 +35,9 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 2px solid 
 .nav-mark { font: 500 20px var(--sans); }
 
 .hero { min-height: 100vh; position: relative; display: flex; align-items: center; padding: 145px 9vw 76px; color: var(--paper); background: var(--ink); isolation: isolate; }
-.hero-portal-field { position: absolute; z-index: 0; inset: 0; overflow: hidden; pointer-events: none; opacity: .86; mix-blend-mode: screen; contain: strict; }
-.hero-portal-field > .threeui-background { position: absolute; inset: 0; width: 100%; height: 100%; min-width: 0; min-height: 0; overflow: hidden; contain: strict; }
-.hero-portal-field canvas { display: block; width: 100% !important; height: 100% !important; transform: translateZ(0); backface-visibility: hidden; }
-.portal-fallback { position: absolute; inset: 0; background: radial-gradient(ellipse at 52% 50%, rgba(29,71,54,.18), transparent 52%); }
+.hero-cipher-field { position: absolute; z-index: 0; inset: 0; overflow: hidden; pointer-events: none; opacity: .52; mix-blend-mode: screen; contain: strict; }
+.hero-cipher-field > div { position: absolute !important; inset: 0; width: 100% !important; height: 100% !important; min-width: 0; min-height: 0; overflow: hidden; }
+.hero-cipher-field canvas { display: block; width: 100% !important; height: 100% !important; transform: translateZ(0); backface-visibility: hidden; }
 .hero-topline, .hero-stamp, .hero-foot { z-index: 1; }
 .hero-copy { position: relative; z-index: 1; }
 .hero::before { content: ""; position: absolute; inset: 0; z-index: -1; opacity: .14; pointer-events: none; background: radial-gradient(circle at 52% 48%, rgba(63,163,116,.08), transparent 42%); }

@@ -1,10 +1,9 @@
-import { lazy, Suspense, useEffect, useMemo, useRef, useState, type CSSProperties, type FormEvent, type PointerEvent as ReactPointerEvent, type ReactNode } from "react";
+import { useEffect, useMemo, useRef, useState, type CSSProperties, type FormEvent, type PointerEvent as ReactPointerEvent, type ReactNode } from "react";
 import { trpc } from "@/lib/trpc";
 import { AtSign, Facebook, Instagram, Music2 } from "lucide-react";
+import CipherReach from "@/components/CipherReach";
 
 const STORAGE_KEY = "hoodwink-editor-state-v1";
-const LazyPortalField = lazy(() => import("@designcodeio/threeui").then(({ PortalFieldCollection }) => ({ default: PortalFieldCollection })));
-
 type EditValue = {
   text?: string;
   fontFamily?: string;
@@ -297,7 +296,7 @@ export default function Home() {
       <div className="canvas-stage" style={{ transform: `translate(${pan.x}px, ${pan.y}px) scale(${zoom})` }}>
       {editMode && showGuides && <div className="persistent-guides" aria-hidden="true"><span className="guide-center-x" /><span className="guide-center-y" /><span className="guide-quarter-x" /><span className="guide-three-quarter-x" /><span className="guide-quarter-y" /><span className="guide-three-quarter-y" /><span className="guide-center-label">CENTER</span></div>}
       <section className="hero" id="top" onClick={(event) => { if (editMode && event.target === event.currentTarget) setSelectedId(null); }}>
-        <div className="hero-portal-field" aria-hidden="true"><Suspense fallback={<div className="portal-fallback" />}><LazyPortalField mode="dark" speed={0.16} size={0.82} length={0.72} density={0.25} opacity={0.48} hue={145} saturation={0.78} brightness={0.62} /></Suspense></div>
+        <div className="hero-cipher-field" aria-hidden="true"><CipherReach background="#11110f" glyphColor="#e9e5db" accent="#3fa374" columns={104} scale={88} offsetY={18} speed={7.2} /></div>
         <div className="hero-topline"><Editable id="hero-edition" label="Edition label" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag}>EST. 2026</Editable><Editable id="hero-location" label="Location label" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag}>Dhaka / Worldwide</Editable></div>
         <div className={`hero-stamp ${heroImage ? "has-generated-image" : ""}`} aria-hidden="true" style={heroImage ? { backgroundImage: `url(${heroImage})` } : undefined}><Editable id="hero-stamp-title" label="Stamp title" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag}>WELCOME TO<br />THE CLIQUE</Editable><span className="stamp-star">✳</span><Editable id="hero-stamp-footer" label="Stamp footer" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag}>KNOW EVERYTHING<br />ABOUT HOODWINK</Editable></div>
         <a className="text-link hero-cta" href="#join"><Editable id="hero-cta" label="Hero CTA" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag}>Get early access</Editable><b>↘</b></a>
