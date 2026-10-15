@@ -40,7 +40,6 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 2px solid 
 .hero-cipher-field canvas { display: block; width: 100% !important; height: 100% !important; transform: translateZ(0); backface-visibility: hidden; }
 .hero-topline, .hero-stamp, .hero-foot { z-index: 1; }
 .hero-copy { position: relative; z-index: 1; }
-.hero::before { content: ""; position: absolute; inset: 0; z-index: -1; opacity: .14; pointer-events: none; background: radial-gradient(circle at 52% 48%, rgba(63,163,116,.08), transparent 42%); }
 .hero::after { content: ""; position: absolute; inset: 11% 4.5% 8%; border: 1px solid rgba(233,229,219,.14); pointer-events: none; }
 .hero-topline { position: absolute; top: 105px; left: 9vw; right: 9vw; display: flex; justify-content: space-between; color: var(--muted); text-transform: uppercase; font: 400 9px var(--mono); letter-spacing: .1em; }
 .hero-copy { max-width: 750px; animation: enter .8s var(--ease-out) both; }
@@ -54,9 +53,10 @@ h1 em, h2 em { color: var(--gold); font-style: italic; }
 .hero-cta > span { display: inline-block; transition: transform .18s var(--ease-out); }
 .hero-cta:hover > span { transform: translate3d(0, -2px, 0); }
 .text-link b { color: var(--green-bright); font-size: 17px; font-weight: 400; }
-.hero-stamp { position: absolute; right: 10vw; top: 47%; display: grid; width: 178px; height: 178px; place-content: center; gap: 17px; border: 1px solid rgba(168,135,63,.75); border-radius: 50%; color: var(--gold); text-align: center; font: 400 9px/1.35 var(--mono); letter-spacing: .08em; transform: rotate(12deg); animation: float 5s ease-in-out infinite; }
+.hero-stamp { position: absolute; right: 10vw; top: 35%; display: grid; width: 178px; height: 178px; place-content: center; gap: 17px; border: 1px solid rgba(168,135,63,.75); border-radius: 50%; color: var(--gold); text-align: center; font: 400 9px/1.35 var(--mono); letter-spacing: .08em; transform: rotate(12deg); animation: float 5s ease-in-out infinite; }
 .stamp-star { font: 25px var(--sans); line-height: .5; }
-.hero-cta { position: absolute; z-index: 1; top: calc(47% + 205px); right: calc(10vw + 8px); }
+.hero-cta { position: static; z-index: 1; }
+.hero-cta-slot { z-index: 1; }
 .hero-foot { position: absolute; bottom: 27px; left: 50%; display: flex; align-items: center; gap: 16px; color: var(--muted); font: 400 9px var(--mono); letter-spacing: .06em; text-transform: uppercase; transform: translateX(-50%); white-space: nowrap; }
 .scroll-line { display: inline-block; width: 70px; height: 1px; flex: 0 0 70px; background: var(--muted); transform-origin: left; animation: pulse 2.2s ease-in-out infinite; }
 .scroll-line-left { transform-origin: right; }
@@ -145,9 +145,9 @@ h1 em, h2 em { color: var(--gold); font-style: italic; }
   .hero-topline { top: 90px; left: 10vw; right: 10vw; }
   h1 { font-size: clamp(67px, 18vw, 125px); }
   .hero-intro { margin-top: 36px; }
-  .hero-stamp { right: 8vw; top: auto; bottom: 145px; width: 125px; height: 125px; font-size: 7px; gap: 11px; }
+  .hero-stamp { right: 8vw; top: auto; bottom: 205px; width: 125px; height: 125px; font-size: 7px; gap: 11px; }
   .stamp-star { font-size: 18px; }
-  .hero-cta { top: auto; right: 8vw; bottom: 102px; }
+  .hero-cta { top: auto; right: auto; bottom: auto; }
   .hero-foot { bottom: 22px; gap: 10px; }
   .scroll-line { width: 54px; flex-basis: 54px; }
   .section-grid { grid-template-columns: 1fr; gap: 48px; padding: 91px 8vw; }
