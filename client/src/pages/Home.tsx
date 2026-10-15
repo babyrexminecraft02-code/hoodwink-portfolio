@@ -24,8 +24,8 @@ const defaultState: EditorState = { edits: {}, images: {} };
 
 const pieces = [
   { number: "01", title: "HoodWink Tee", detail: "* 1x1 RIB KNIT COLLAR *\n* 100% COTTON *\n* CREW-NECK *\n* 200GSM", price: "$128", image: "/manus-storage/hoodwink-tee_73f0ebf4.webp", note: "One side says stay hidden. The other says you were never hiding." },
-  { number: "02", title: "EXPTL. Band Tee", detail: "Two collars", price: "$214", image: "/manus-storage/exptl-band-tee_487daf4d.webp", note: "A familiar silhouette with an unfamiliar point of view." },
-  { number: "03", title: "Muscle Memory Tee", detail: "Hidden pocket", price: "$146", image: "/manus-storage/muscle-memory-tee_69a48a50.webp", note: "The detail you miss is the detail that matters most." },
+  { number: "02", title: "EXPTL. Band Tee", detail: "* 1x1 RIB KNIT COLLAR *\n* 100% COTTON *\n* CREW-NECK *\n* 200GSM", price: "$214", image: "/manus-storage/exptl-band-tee_487daf4d.webp", note: "A familiar silhouette with an unfamiliar point of view." },
+  { number: "03", title: "Muscle Memory Tee", detail: "* 1x1 RIB KNIT COLLAR *\n* 100% COTTON *\n* CREW-NECK *\n* 200GSM", price: "$146", image: "/manus-storage/muscle-memory-tee_69a48a50.webp", note: "The detail you miss is the detail that matters most." },
 ];
 
 const fontOptions = [
