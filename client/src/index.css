@@ -140,8 +140,10 @@ h1 em, h2 em { color: var(--gold); font-style: italic; }
   .desktop-nav { display: flex; gap: 10px; margin-right: 12px; font-size: 8px; letter-spacing: .04em; }
   .nav-actions { gap: 8px; }
   .nav-mark { font-size: 17px; }
-  .hero { min-height: 760px; padding: 150px 10vw 105px; align-items: flex-start; }
+  .hero { min-height: 760px; padding: 150px 10vw 105px; align-items: flex-start; background: linear-gradient(180deg, #686868 0%, #303030 34%, #11110f 72%, #080808 100%); }
   .hero::after { inset: 70px 6vw 70px; }
+  .hero-cipher-field { opacity: .58; }
+  .hero-cipher-field > div { transform: translate3d(0, -5%, 0) scale(.76); transform-origin: center center; }
   .hero-topline { top: 90px; left: 10vw; right: 10vw; }
   h1 { font-size: clamp(67px, 18vw, 125px); }
   .hero-intro { margin-top: 36px; }
