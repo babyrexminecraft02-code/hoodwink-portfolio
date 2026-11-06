@@ -452,3 +452,8 @@ h1, h2, h3 { text-wrap: balance; }
 .hero::after { display: none; }
 .nav-wrap { color: #fff; mix-blend-mode: difference; }
 .join, .footer { background: #1F1820; }
+.drop { background: #B8AFC4; color: var(--ink); }
+.drop .section-label { color: var(--green); }
+.drop-heading p { color: rgba(17,17,15,.64); }
+.piece-meta p { color: var(--green); }
+.piece-meta strong { color: var(--ink); }
