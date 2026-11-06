@@ -452,11 +452,11 @@ h1, h2, h3 { text-wrap: balance; }
 .hero::after { display: none; }
 .nav-wrap { color: #fff; mix-blend-mode: difference; }
 .join, .footer { background: #1F1820; }
-.drop { background: #B8AFC4; color: #34202D; }
-.drop .section-label { color: var(--green); }
-.drop-heading p { color: rgba(52,32,45,.64); }
+.drop { background: #34202D; color: var(--paper); }
+.drop .section-label { color: var(--paper); }
+.drop-heading p { color: rgba(233,229,219,.64); }
 .piece-meta p { color: var(--green); }
-.piece-meta strong { color: #34202D; }
+.piece-meta strong { color: var(--paper); }
 
 /* Keep the page rhythm screen-sized like the hero at every viewport. Content may grow
    beyond the minimum when a narrow screen needs more room for readable product cards. */
