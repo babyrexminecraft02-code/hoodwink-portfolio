@@ -447,3 +447,8 @@ h1, h2, h3 { text-wrap: balance; }
   .join-copy { margin-block: 1.75rem 1.5rem; font-size: .6875rem; }
   .footer { grid-template-columns: 1fr auto; gap: 1.125rem 1.5rem; padding-inline: 8vw; }
 }
+
+/* Brand surface and contrast refinements. */
+.hero::after { display: none; }
+.nav-wrap { color: #fff; mix-blend-mode: difference; }
+.footer { background: #1F1820; }
