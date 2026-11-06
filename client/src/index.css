@@ -491,7 +491,11 @@ h1, h2, h3 { text-wrap: balance; }
 /* Keep overscroll consistent with both ends of the page: hero light at the top,
    Early Access/footer dark at the bottom. */
 body {
-  background: linear-gradient(180deg, #B8AFC4 0%, #8D829A 28%, #514659 68%, #1F1820 100%);
+  background: transparent;
+}
+
+html {
+  background: linear-gradient(180deg, #B8AFC4 0%, #8D829A 28%, #514659 68%, #1F1820 100%) fixed;
 }
 
 .site-shell {
