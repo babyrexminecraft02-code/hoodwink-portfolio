@@ -457,3 +457,27 @@ h1, h2, h3 { text-wrap: balance; }
 .drop-heading p { color: rgba(17,17,15,.64); }
 .piece-meta p { color: var(--green); }
 .piece-meta strong { color: var(--ink); }
+
+/* Keep the page rhythm screen-sized like the hero at every viewport. Content may grow
+   beyond the minimum when a narrow screen needs more room for readable product cards. */
+.hero,
+.story,
+.drop,
+.manifesto,
+.join,
+.footer {
+  min-height: 100vh;
+  min-height: 100svh;
+}
+
+@media (max-width: 47.5rem) {
+  .hero,
+  .story,
+  .drop,
+  .manifesto,
+  .join,
+  .footer {
+    min-height: 100vh;
+    min-height: 100svh;
+  }
+}
