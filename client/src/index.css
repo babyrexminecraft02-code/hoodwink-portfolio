@@ -64,7 +64,7 @@ h1 em, h2 em { color: var(--gold); font-style: italic; }
 .section-grid { display: grid; grid-template-columns: minmax(150px, 22%) 1fr; gap: 7vw; padding: 150px 9vw; }
 .section-label { display: flex; align-items: flex-start; gap: 13px; color: var(--green); font: 500 10px var(--mono); letter-spacing: .08em; text-transform: uppercase; }
 .section-label span:first-child { color: var(--gold); }
-.story { position: relative; background: var(--paper); isolation: isolate; }
+.story { position: relative; background: #B8AFC4; isolation: isolate; }
 .story::before { content: ""; position: absolute; z-index: -1; left: 7%; top: 23%; width: 42%; height: 54%; pointer-events: none; background: radial-gradient(circle, rgba(166,140,166,.16), transparent 68%); filter: blur(24px); }
 .story .section-label { align-self: center; }
 .story-display { text-shadow: 0 0 22px rgba(166,140,166,.14); }
@@ -92,7 +92,7 @@ h1 em, h2 em { color: var(--gold); font-style: italic; }
 .piece-meta p, .piece-meta strong { margin-top: 5px; color: var(--green-bright); font: 400 10px/1.55 "Helvetica Neue", Helvetica, Arial, sans-serif; text-transform: uppercase; letter-spacing: .07em; white-space: pre-line; }
 .piece-meta strong { margin-top: 3px; color: var(--paper); font-weight: 400; }
 
-.manifesto { min-height: 78vh; align-items: center; background: var(--paper); }
+.manifesto { min-height: 78vh; align-items: center; background: #B8AFC4; }
 .manifesto .section-label { align-self: center; }
 .manifesto h2 { display: flex; flex-direction: column; align-items: flex-start; color: var(--ink); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; letter-spacing: -.045em; }
 .manifesto-lead, .manifesto-primary, .manifesto-secondary { display: block; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
