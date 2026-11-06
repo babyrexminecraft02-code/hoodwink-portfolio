@@ -346,3 +346,104 @@ h1 { letter-spacing: -.06em; line-height: .86; }
   .zoom-control { grid-column: 1 / -1; grid-row: 1; }
   .canvas-tools .tool-button:nth-of-type(2), .canvas-tools .tool-button:nth-of-type(3) { grid-column: auto; }
 }
+
+/* Typography system pass — routed through typography-skills.
+   Body is the anchor; display type stays fluid, while labels and UI remain stepped. */
+:root {
+  --type-body: 1rem;
+  --type-label: .6875rem;
+  --type-meta: .75rem;
+  --type-title: clamp(2.25rem, 1.35rem + 3.5vw, 4.375rem);
+  --measure-copy: 42rem;
+  --space-section: clamp(5.5rem, 8vw, 9.375rem);
+}
+
+body {
+  font-size: var(--type-body);
+  line-height: 1.5;
+}
+
+/* Meaningful text remains selectable; editing mode keeps its intentional canvas behavior. */
+*:not(.is-editing *) { user-select: text; -webkit-user-select: text; }
+button, a, img, .piece-image, .hero-cipher-field, .scroll-line { user-select: none; -webkit-user-select: none; }
+
+h1, h2, h3, p { text-wrap: pretty; }
+h1, h2, h3 { text-wrap: balance; }
+
+.nav-wrap { padding-block: clamp(1.125rem, 2.2vw, 1.625rem); }
+.desktop-nav { gap: clamp(1.25rem, 2.15vw, 1.9375rem); font-size: var(--type-label); letter-spacing: .08em; }
+.nav-mark { font-size: 1.25rem; }
+
+.hero { padding: clamp(8rem, 12vw, 9.0625rem) 9vw clamp(4.5rem, 7vw, 5rem); }
+.hero-topline { font-size: .625rem; letter-spacing: .1em; }
+.hero-title, h1 { font-size: clamp(4rem, 1.8rem + 10vw, 11.25rem); line-height: .86; letter-spacing: -.06em; }
+.hero-intro { max-width: 22rem; margin-block: clamp(2rem, 3.5vw, 2.75rem) 1.75rem; font-size: .9375rem; line-height: 1.6; }
+.eyebrow { margin-bottom: 1.5rem; font-size: var(--type-label); letter-spacing: .14em; }
+.text-link { gap: .75rem; padding-bottom: .625rem; font-size: .6875rem; letter-spacing: .08em; }
+
+.section-grid { gap: clamp(2.75rem, 6vw, 7rem); padding-block: var(--space-section); }
+.section-label { gap: .8125rem; font-size: var(--type-label); letter-spacing: .1em; }
+.story-content { max-width: var(--measure-copy); }
+.display-copy { max-width: 47rem; font-size: var(--type-title); line-height: 1.04; letter-spacing: -.035em; }
+.story-columns { max-width: 42.5rem; gap: clamp(2rem, 7vw, 6.25rem); margin-top: clamp(3rem, 5.25vw, 4.75rem); font-size: var(--type-body); line-height: 1.65; }
+.story-columns em { font-size: 1.125rem; }
+
+.drop-header { padding-bottom: clamp(3.25rem, 5.5vw, 5.125rem); }
+.drop-heading h2, .drop-title { font-size: clamp(2.875rem, 1.7rem + 4.4vw, 5.125rem); line-height: .94; letter-spacing: -.05em; }
+.drop-heading p { max-width: 34rem; margin-top: 1.5rem; font-size: .75rem; line-height: 1.5; letter-spacing: .1em; }
+.pieces-grid { gap: clamp(.625rem, 1.35vw, 1.1875rem); }
+.piece-index { top: 1rem; left: 1rem; font-size: var(--type-meta); }
+.piece-reveal { font-size: .8125rem; line-height: 1.5; }
+.piece-meta { padding-top: 1rem; }
+.piece-meta h3 { font-size: 1.125rem; line-height: 1.15; letter-spacing: -.015em; }
+.piece-meta p, .piece-meta strong { margin-top: .375rem; font-family: var(--sans); font-size: var(--type-label); line-height: 1.6; letter-spacing: .08em; }
+
+.manifesto { min-height: 78vh; }
+.manifesto h2, .manifesto-lead, .manifesto-primary, .manifesto-secondary { font-family: var(--sans); }
+.manifesto h2 { letter-spacing: -.035em; }
+.manifesto-lead { font-size: clamp(2.625rem, 1.65rem + 4.1vw, 5.125rem); line-height: .98; letter-spacing: -.045em; }
+.manifesto-primary { margin-top: clamp(1.75rem, 2.5vw, 2.125rem); font-size: clamp(1.875rem, 1.2rem + 2.45vw, 3.375rem); line-height: 1.04; letter-spacing: -.035em; }
+.manifesto-secondary { margin-top: clamp(1.75rem, 2.5vw, 2.125rem); font-size: clamp(1.6875rem, 1.1rem + 2.1vw, 2.875rem); line-height: 1.04; letter-spacing: -.03em; }
+
+.join { padding-block: clamp(6.25rem, 10vw, 8.75rem) clamp(5.5rem, 8vw, 7.8125rem); }
+.join-inner { max-width: 40.625rem; }
+.join h2, .join-title h2 { font-size: clamp(3.25rem, 1.8rem + 5.5vw, 5.875rem); line-height: .91; letter-spacing: -.055em; }
+.join-copy { max-width: 26rem; margin-block: 2rem 1.75rem; font-size: var(--type-label); line-height: 1.65; }
+.signup-form { max-width: 30.625rem; }
+.signup-form input { padding-block: .875rem; font-size: .8125rem; line-height: 1.5; }
+.signup-form button { padding-block: .875rem; font-size: var(--type-label); letter-spacing: .08em; }
+.privacy-note { max-width: 24.375rem; margin-top: .875rem; font-size: var(--type-label); line-height: 1.6; }
+
+.footer { gap: 2rem; padding-block: 1.8125rem 1.6875rem; font-size: var(--type-label); line-height: 1.5; letter-spacing: .08em; }
+.footer-note { font-size: .8125rem; letter-spacing: .02em; }
+.footer-social-label { font-size: .5625rem; letter-spacing: .14em; }
+
+@media (max-width: 47.5rem) {
+  .nav-wrap { padding-inline: 6vw; }
+  .desktop-nav { gap: .625rem; margin-right: .75rem; font-size: .5rem; letter-spacing: .055em; }
+  .nav-mark { font-size: 1.0625rem; }
+  .hero { min-height: 47.5rem; padding: 9.375rem 10vw 6.5625rem; }
+  .hero-topline { top: 5.625rem; left: 10vw; right: 10vw; font-size: .5625rem; }
+  .hero-title, h1 { font-size: clamp(4rem, 1.8rem + 10vw, 7.8125rem); line-height: .88; }
+  .hero-intro { max-width: 20rem; margin-top: 2.25rem; font-size: .9375rem; }
+  .hero-stamp { width: 7.8125rem; height: 7.8125rem; gap: .6875rem; font-size: .4375rem; }
+  .section-grid { grid-template-columns: 1fr; gap: 2.75rem; padding-inline: 8vw; }
+  .section-label { font-size: .625rem; }
+  .display-copy { font-size: clamp(2.25rem, 1.35rem + 3.5vw, 3.5rem); line-height: 1.04; }
+  .story-columns { grid-template-columns: 1fr; gap: 1.5rem; margin-top: 2.75rem; font-size: 1rem; line-height: 1.65; }
+  .drop-header { gap: 2.75rem; padding-bottom: 3.25rem; }
+  .drop-heading h2, .drop-title { font-size: clamp(2.875rem, 1.7rem + 4.4vw, 4rem); }
+  .drop-heading p { margin-top: 1.25rem; font-size: .6875rem; }
+  .pieces-grid { gap: .625rem; padding-inline: 5vw; }
+  .piece-meta { padding-top: .75rem; }
+  .piece-meta h3 { font-size: clamp(.75rem, .66rem + .5vw, .9375rem); line-height: 1.2; }
+  .piece-meta p, .piece-meta strong { font-size: .5625rem; letter-spacing: .06em; }
+  .manifesto { min-height: 37.5rem; }
+  .manifesto-lead { font-size: clamp(2.625rem, 1.65rem + 4.1vw, 4rem); }
+  .manifesto-primary { margin-top: 1.5rem; font-size: clamp(1.875rem, 1.2rem + 2.45vw, 2.75rem); }
+  .manifesto-secondary { margin-top: 1.5rem; font-size: clamp(1.6875rem, 1.1rem + 2.1vw, 2.375rem); }
+  .join { padding-inline: 8vw; }
+  .join h2, .join-title h2 { font-size: clamp(3.25rem, 1.8rem + 5.5vw, 4.75rem); }
+  .join-copy { margin-block: 1.75rem 1.5rem; font-size: .6875rem; }
+  .footer { grid-template-columns: 1fr auto; gap: 1.125rem 1.5rem; padding-inline: 8vw; }
+}
