@@ -487,3 +487,9 @@ h1, h2, h3 { text-wrap: balance; }
 .footer {
   min-height: auto;
 }
+
+/* Prevent mobile overscroll from exposing the paper-colored page underlay. */
+body,
+.site-shell {
+  background: #1F1820;
+}
