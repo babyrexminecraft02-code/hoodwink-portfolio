@@ -127,10 +127,10 @@ h1 em, h2 em { color: var(--gold); font-style: italic; }
 .footer-note { justify-self: center; align-self: center; margin-top: 5px; color: var(--paper); font-family: var(--serif); font-size: 13px; font-style: italic; letter-spacing: .02em; text-transform: none; }
 .footer-aside { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
 .footer-social-label { color: rgba(233,229,219,.42); font-size: 8px; letter-spacing: .12em; }
-.social-links { display: flex; align-items: center; justify-content: flex-end; gap: 8px; }
-.social-link { display: inline-flex; align-items: center; justify-content: center; color: var(--paper) !important; }
+.social-links { display: flex; align-items: center; justify-content: space-between; width: 100%; gap: 0; }
+.social-link { display: inline-flex; align-items: center; justify-content: center; width: 16px; height: 16px; flex: 0 0 16px; color: var(--paper) !important; }
+.social-link svg { display: block; width: 16px; height: 16px; }
 .social-link:hover { color: var(--paper) !important; }
-.x-glyph { font: 500 14px/1 var(--sans); text-transform: none; }
 
 /* Apple-inspired foundations: clear hierarchy, measured tracking, and adaptable rhythm.
    HoodWink's existing content, palette, imagery, and signature motion remain unchanged. */
@@ -202,7 +202,7 @@ h1 { letter-spacing: -.06em; line-height: .86; }
   .footer-note { grid-column: 1 / -1; grid-row: 1; justify-self: start; margin: 0 0 4px; text-align: left; }
   .footer-aside { align-items: flex-end; }
   .footer-social-label { display: block; }
-  .social-links { width: auto; }
+  .social-links { width: 100%; }
 }
 
 
