@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState, type CSSProperties, type FormEvent, type PointerEvent as ReactPointerEvent, type ReactNode } from "react";
 import { trpc } from "@/lib/trpc";
-import { AtSign, Facebook, Instagram, Music2 } from "lucide-react";
+import { Facebook, Instagram } from "lucide-react";
 import CipherReach from "@/components/CipherReach";
 
 const STORAGE_KEY = "hoodwink-editor-state-v1";
@@ -34,12 +34,16 @@ const fontOptions = [
   { label: "Archivo / original", value: "Archivo, Arial, sans-serif" },
 ];
 
+type SocialIconProps = { size?: number; strokeWidth?: number };
+const TikTokIcon = ({ size = 15, strokeWidth = 1.8 }: SocialIconProps) => <svg aria-hidden="true" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round"><path d="M15 4v10.25a4.25 4.25 0 1 1-3.5-4.18" /><path d="M15 4c.68 2.12 2.08 3.38 4.5 3.6" /></svg>;
+const ThreadsIcon = ({ size = 15, strokeWidth = 1.7 }: SocialIconProps) => <svg aria-hidden="true" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={strokeWidth} strokeLinecap="round"><path d="M17.5 10.4c-.65-2.2-2.3-3.4-4.9-3.4-2.85 0-4.7 1.55-4.7 4.1 0 3.15 2.4 4.8 5.55 4.8 2.8 0 4.55-1.15 4.55-3.2 0-1.65-1.35-2.7-3.7-2.7-2.1 0-3.5.8-3.5 2.15 0 1.1 1.05 1.75 2.75 1.75 2.4 0 3.95-1.1 3.95-3.35 0-3.1-2.3-5.25-5.7-5.25-4.3 0-6.8 2.7-6.8 7.15 0 4.55 2.75 7.55 7.25 7.55 3.7 0 6.05-1.5 6.75-4.05" /></svg>;
+
 const socialLinks = [
   { label: "Instagram", href: "https://www.instagram.com/hoodwink_co", icon: Instagram },
   { label: "Facebook", href: "https://www.facebook.com/HoodWink.1230", icon: Facebook },
-  { label: "TikTok", href: "https://www.tiktok.com/@hoodwink_co", icon: Music2 },
+  { label: "TikTok", href: "https://www.tiktok.com/@hoodwink_co", icon: TikTokIcon },
   { label: "X", href: "https://x.com/hoodwink_co", icon: null },
-  { label: "Threads", href: "https://www.threads.com/@hoodwink_co", icon: AtSign },
+  { label: "Threads", href: "https://www.threads.com/@hoodwink_co", icon: ThreadsIcon },
 ];
 
 function readStoredState(): EditorState {
