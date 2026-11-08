@@ -34,7 +34,7 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 2px solid 
 .desktop-nav a:hover, .nav-mark:hover { opacity: 1; transform: translate3d(0, -2px, 0); }
 .nav-mark { font: 500 20px var(--sans); }
 
-.hero { min-height: 100vh; position: relative; display: flex; align-items: center; padding: 145px 9vw 76px; color: var(--paper); background: #B8AFC4; background: linear-gradient(180deg, #B8AFC4 0%, #A99FB6 12%, #8D829A 28%, #6F6378 50%, #514659 68%, #352B38 74%, #1F1820 78%, #1F1820 100%); isolation: isolate; }
+.hero { min-height: 100vh; position: relative; display: flex; align-items: center; padding: 145px 9vw 76px; color: var(--paper); background: #B8AFC4; background: linear-gradient(180deg, #B8AFC4 0%, #A99FB6 12%, #8D829A 28%, #6F6378 50%, #514659 72%, #352B38 88%, #1F1820 100%); isolation: isolate; }
 .hero-cipher-field { position: absolute; z-index: 0; inset: 0; overflow: hidden; pointer-events: none; opacity: .52; mix-blend-mode: screen; contain: strict; }
 .hero-cipher-field > div { position: absolute !important; inset: 0; width: 100% !important; height: 100% !important; min-width: 0; min-height: 0; overflow: hidden; }
 .hero-cipher-field canvas { display: block; width: 100% !important; height: 100% !important; transform: translateZ(0); backface-visibility: hidden; }
@@ -164,7 +164,7 @@ h1 { letter-spacing: -.06em; line-height: .86; }
   .desktop-nav { display: flex; gap: 10px; margin-right: 12px; font-size: 8px; letter-spacing: .035em; }
   .nav-actions { gap: 8px; }
   .nav-mark { font-size: 17px; }
-  .hero { min-height: 760px; padding: 150px 10vw 105px; align-items: flex-start; background: linear-gradient(180deg, #B8AFC4 0%, #A99FB6 12%, #8D829A 28%, #6F6378 50%, #514659 68%, #352B38 74%, #1F1820 78%, #1F1820 100%); }
+  .hero { min-height: 760px; padding: 150px 10vw 105px; align-items: flex-start; background: linear-gradient(180deg, #B8AFC4 0%, #A99FB6 12%, #8D829A 28%, #6F6378 50%, #514659 72%, #352B38 88%, #1F1820 100%); }
   .hero::after { inset: 70px 6vw 70px; }
   .hero-cipher-field { opacity: .58; }
   .hero-cipher-field > div { transform: translate3d(0, -5%, 0) scale(.76); transform-origin: center center; }
