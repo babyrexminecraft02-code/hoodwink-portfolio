@@ -288,7 +288,7 @@ export default function Home() {
   return (
     <main className={`site-shell ${editMode ? "is-editing" : ""}`} onPointerMove={(event) => { moveDrag(event); movePanel(event); movePan(event); }} onPointerUp={() => { endDrag(); setPanelDragging(false); setIsPanning(false); }}>
       <header className="nav-wrap">
-        <nav className="desktop-nav" aria-label="Primary navigation"><a href="#manifesto">In plain sight</a><a href="#drop">The drop</a><a href="#story">What we believe</a></nav>
+        <nav className="desktop-nav" aria-label="Primary navigation"><a href="#drop">The drop</a><a href="#story">Manifesto</a><a href="#join">Early access</a></nav>
         <div className="nav-actions"><a className="nav-mark" href="#manifesto" aria-label="Jump to In Plain Sight">↗</a></div>
       </header>
 
