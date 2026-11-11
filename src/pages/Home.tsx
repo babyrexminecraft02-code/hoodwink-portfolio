@@ -1,12 +1,17 @@
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ScrollSmoother } from "gsap/ScrollSmoother";
 import { useEffect, useMemo, useRef, useState, type CSSProperties, type FormEvent, type PointerEvent as ReactPointerEvent, type ReactNode } from "react";
 import { AtSign, Music2 } from "lucide-react";
 
 type IconProps = { size?: number; strokeWidth?: number; strokeLinecap?: "round"; strokeLinejoin?: "round" };
-const svgProps = ({ size = 15, strokeWidth = 1.7 }: IconProps) => ({ width: size, height: size, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth, strokeLinecap: "round" as const, strokeLinejoin: "round" as const });
+const svgProps = ({ size = 16, strokeWidth = 1.7 }: IconProps) => ({ width: size, height: size, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth, strokeLinecap: "round" as const, strokeLinejoin: "round" as const });
 const Instagram = (p: IconProps) => <svg {...svgProps(p)}><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r=".6" /></svg>;
 const Facebook = (p: IconProps) => <svg {...svgProps(p)}><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" /></svg>;
 import CipherReach from "@/components/CipherReach";
 import DigitalRain from "@/components/DigitalRain";
+
+gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
 const STORAGE_KEY = "hoodwink-editor-state-v1";
 type EditValue = {
@@ -35,7 +40,7 @@ const pieces = [
 const fontOptions = [
   { label: "Fraunces / display", value: "Fraunces, Georgia, serif" },
   { label: "DM Sans / body", value: "DM Sans, Arial, sans-serif" },
-  { label: "DM Mono / label", value: "DM Mono, monospace" },
+  { label: "Whois Mono / label", value: "Whois Mono, monospace" },
   { label: "Archivo / original", value: "Archivo, Arial, sans-serif" },
 ];
 
@@ -191,6 +196,26 @@ export default function Home() {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    // GSAP ScrollSmoother: inertial, eased scrolling of #smooth-content inside a fixed wrapper
+    const smoother = ScrollSmoother.create({ wrapper: "#smooth-wrapper", content: "#smooth-content", smooth: 1.4, smoothTouch: 0.1 });
+    const onAnchorClick = (event: MouseEvent) => {
+      const link = (event.target as HTMLElement).closest<HTMLAnchorElement>('a[href^="#"]');
+      if (!link) return;
+      const hash = link.getAttribute("href")!;
+      const target = hash === "#top" ? 0 : document.querySelector(hash);
+      if (target === null) return;
+      event.preventDefault();
+      smoother.scrollTo(target, true, "top top");
+    };
+    document.addEventListener("click", onAnchorClick);
+    return () => {
+      document.removeEventListener("click", onAnchorClick);
+      smoother.kill();
+    };
+  }, []);
+
   function updateEdit(id: string, patch: EditValue) {
     setState((previous) => ({ ...previous, edits: { ...previous.edits, [id]: { ...previous.edits[id], ...patch } } }));
     setHistory((previous) => previous[previous.length - 1] === id ? previous : [...previous, id]);
@@ -337,6 +362,7 @@ export default function Home() {
         <div className="nav-actions"><a className="nav-mark" href="#manifesto" aria-label="Jump to In Plain Sight"><img src="/BATSVG.svg" alt="" aria-hidden="true" /></a></div>
       </header>
 
+      <div id="smooth-wrapper"><div id="smooth-content">
       <div className={`canvas-viewport ${handTool ? "hand-enabled" : ""} ${isPanning ? "is-panning" : ""}`} onPointerDown={startPan}>
       <div className="canvas-stage" style={{ transform: `translate(${pan.x}px, ${pan.y}px) scale(${zoom})` }}>
       {editMode && showGuides && <div className="persistent-guides" aria-hidden="true"><span className="guide-center-x" /><span className="guide-center-y" /><span className="guide-quarter-x" /><span className="guide-three-quarter-x" /><span className="guide-quarter-y" /><span className="guide-three-quarter-y" /><span className="guide-center-label">CENTER</span></div>}
@@ -355,9 +381,10 @@ export default function Home() {
       <section className="story section-grid" id="story"><div className="section-label" data-reveal><Editable id="story-index" label="Story section number" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag}>03</Editable><Editable id="story-label" label="Story section label" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag}>What we believe</Editable></div><div className="story-content"><Editable id="story-display" label="Story manifesto" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag} className="display-copy" style={styleFor("story-display")}>{state.edits["story-display"]?.text ?? "A wink is a small deception everyone's in on. That's the label: clothes with a second read, built for people who like being the only ones who get the joke."}</Editable><div className="story-columns"><Editable id="story-audience" label="Story audience copy" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag} style={styleFor("story-audience")}>Every good trick has two audiences: the one who's tricked, and the second who's <em>in on it.</em></Editable><Editable id="story-dresses" label="Story product copy" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag} style={styleFor("story-dresses")}>HoodWink dresses the second kind. A silhouette that catches the eye of a person across the street and that you can call <em>Deceiving.</em></Editable></div></div></section>
 
       <section className="join" id="join"><div className="join-rain"><DigitalRain shuffle headColor="#E4E2E8" trailColor="#B8AFC4" glyphSize={12} trail={14} speed={4} angle={0} density={48} /></div><div className="join-inner"><Editable id="join-eyebrow" label="Join eyebrow" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag} className="eyebrow">Know before it drops.</Editable><Editable id="join-title" label="Join title" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag} className="join-title"><h2>No spam.<br /><em>Just the good stuff.</em></h2></Editable><Editable id="join-copy" label="Join description" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag} className="join-copy">No restocks announced twice. Just the exclusives and word. Early, to the people already in the <span className="clique-highlight">Clique</span>.</Editable>{submitted ? <div className="success-message" role="status">You&apos;re in. Keep your eyes open.</div> : <form className="signup-form" onSubmit={handleSubmit}><label className="sr-only" htmlFor="email">Email address</label><input id="email" type="email" required placeholder="Your email address" value={email} onChange={(event) => setEmail(event.target.value)} /><button type="submit">Join the clique <span>↗</span></button></form>}<p className="privacy-note">HoodWink never sells your information. That&apos;s the one trick we don&apos;t play.</p></div></section>
-      <footer className="footer"><div className="footer-brand"><Editable id="footer-mark" label="Footer mark" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag}>HOODWINK / 2026</Editable><a className="footer-back" href="#top"><Editable id="footer-back" label="Footer back link" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag}>Back to top ↑</Editable></a></div><Editable id="footer-note" label="Footer note" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag} className="footer-note">A trick, worn well.</Editable><div className="footer-aside"><span className="footer-social-label">Find us in plain sight</span><div className="social-links" aria-label="HoodWink social links">{socialLinks.map(({ label, href, icon: Icon }) => <a key={label} className="social-link" href={href} target="_blank" rel="noreferrer" aria-label={label} title={label}>{Icon ? <Icon size={15} strokeWidth={1.7} strokeLinecap="round" strokeLinejoin="round" /> : <svg className="x-glyph" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 3.2 12.8 12.8M12.8 3.2 3.2 12.8" /></svg>}</a>)}</div></div></footer>
+      <footer className="footer"><div className="footer-brand"><Editable id="footer-mark" label="Footer mark" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag}>HOODWINK / 2026</Editable><a className="footer-back" href="#top"><Editable id="footer-back" label="Footer back link" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag}>Back to top ↑</Editable></a></div><Editable id="footer-note" label="Footer note" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag} className="footer-note">A trick, worn well.</Editable><div className="footer-aside"><span className="footer-social-label">Find us in plain sight</span><div className="social-links" aria-label="HoodWink social links">{socialLinks.map(({ label, href, icon: Icon }) => <a key={label} className="social-link" href={href} target="_blank" rel="noreferrer" aria-label={label} title={label}>{Icon ? <Icon size={16} strokeWidth={1.7} strokeLinecap="round" strokeLinejoin="round" /> : <svg className="x-glyph" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 3.2 12.8 12.8M12.8 3.2 3.2 12.8" /></svg>}</a>)}</div></div></footer>
       </div>
       </div>
+      </div></div>
     </main>
   );
 }
