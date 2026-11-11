@@ -1,1 +1,11 @@
-{}
+{
+  "title": "Hoodwink",
+  "description": "Recreates a design from a GitHub repository, helping developers and teams quickly preview and refine their existing web projects.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
