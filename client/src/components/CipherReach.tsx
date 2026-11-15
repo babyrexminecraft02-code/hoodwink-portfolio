@@ -490,15 +490,27 @@ function __OriginkitBase_CipherReach({
         let W = 0
         let H = 0
         let dpr = 1
+        let measureFrame = 0
         const measure = () => {
-            W = root.offsetWidth
-            H = root.offsetHeight
-            dpr = Math.min(2, window.devicePixelRatio || 1)
+            const nextW = root.offsetWidth
+            const nextH = root.offsetHeight
+            const nextDpr = Math.min(2, window.devicePixelRatio || 1)
+            if (nextW === W && nextH === H && nextDpr === dpr) return
+            W = nextW
+            H = nextH
+            dpr = nextDpr
             canvas.width = Math.max(1, Math.round(W * dpr))
             canvas.height = Math.max(1, Math.round(H * dpr))
         }
+        const scheduleMeasure = () => {
+            if (measureFrame) return
+            measureFrame = window.requestAnimationFrame(() => {
+                measureFrame = 0
+                measure()
+            })
+        }
         measure()
-        const ro = new ResizeObserver(measure)
+        const ro = new ResizeObserver(scheduleMeasure)
         ro.observe(root)
 
         let visible = false
@@ -921,6 +933,7 @@ function __OriginkitBase_CipherReach({
         return () => {
             cancelAnimationFrame(raf)
             ro.disconnect()
+            window.cancelAnimationFrame(measureFrame)
             io.disconnect()
             root.removeEventListener("pointermove", locate)
             root.removeEventListener("pointerenter", locate)
