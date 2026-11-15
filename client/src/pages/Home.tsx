@@ -8,7 +8,6 @@ type IconProps = { size?: number; strokeWidth?: number; strokeLinecap?: "round";
 const svgProps = ({ size = 16, strokeWidth = 1.7 }: IconProps) => ({ width: size, height: size, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth, strokeLinecap: "round" as const, strokeLinejoin: "round" as const });
 const Instagram = (p: IconProps) => <svg {...svgProps(p)}><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r=".6" /></svg>;
 const Facebook = (p: IconProps) => <svg {...svgProps(p)}><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" /></svg>;
-import CipherReach from "@/components/CipherReach";
 import DigitalRain from "@/components/DigitalRain";
 import MoltenRingCarousel from "@/components/MoltenRingCarousel";
 
@@ -359,7 +358,6 @@ export default function Home() {
       <div className="canvas-stage" style={{ transform: `translate(${pan.x}px, ${pan.y}px) scale(${zoom})` }}>
       {editMode && showGuides && <div className="persistent-guides" aria-hidden="true"><span className="guide-center-x" /><span className="guide-center-y" /><span className="guide-quarter-x" /><span className="guide-three-quarter-x" /><span className="guide-quarter-y" /><span className="guide-three-quarter-y" /><span className="guide-center-label">CENTER</span></div>}
       <section className="hero" id="top" onClick={(event) => { if (editMode && event.target === event.currentTarget) setSelectedId(null); }}>
-        <div className="hero-cipher-field" aria-hidden="true"><CipherReach background="transparent" glyphColor="#e9e5db" accent="#3fa374" columns={104} scale={88} offsetY={18} speed={7.2} /></div>
         <div className="hero-topline"><Editable id="hero-edition" label="Edition label" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag}>EST. 2026</Editable><Editable id="hero-location" label="Location label" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag}>Dhaka / Worldwide</Editable></div>
         <div className={`hero-stamp ${heroImage ? "has-generated-image" : ""}`} aria-hidden="true" style={heroImage ? { backgroundImage: `url(${heroImage})` } : undefined}><Editable id="hero-stamp-title" label="Stamp title" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag}>WELCOME TO<br />THE CLIQUE</Editable><span className="stamp-star">✳</span><Editable id="hero-stamp-footer" label="Stamp footer" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag}>KNOW EVERYTHING<br />ABOUT HOODWINK</Editable></div>
         <div className="hero-foot hero-cta-slot"><a className="text-link hero-cta" href="#join"><Editable id="hero-cta" label="Hero CTA" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag}>Get early access</Editable><b>↘</b></a></div>

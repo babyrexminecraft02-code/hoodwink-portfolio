@@ -43,9 +43,6 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 2px solid 
 .nav-actions { position: absolute; right: 4.5vw; }
 
 .hero { min-height: 100svh; position: relative; display: flex; align-items: center; padding: clamp(7rem, 18vh, 9.0625rem) 9vw clamp(4rem, 10vh, 5rem); color: var(--paper); background-image: var(--hero-gradient); isolation: isolate; }
-.hero-cipher-field { position: absolute; z-index: 0; inset: 0; overflow: hidden; pointer-events: none; opacity: .52; mix-blend-mode: screen; contain: strict; mask-image: linear-gradient(to bottom, #000 0%, #000 72%, transparent 100%); -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 72%, transparent 100%); }
-.hero-cipher-field > div { position: absolute !important; inset: 0; width: 100% !important; height: 100% !important; min-width: 0; min-height: 0; overflow: hidden; }
-.hero-cipher-field canvas { display: block; width: 100% !important; height: 100% !important; transform: translateZ(0); backface-visibility: hidden; }
 .hero-topline, .hero-stamp, .hero-foot { z-index: 1; }
 .hero-copy { position: relative; z-index: 1; }
 .hero::before { content: ""; position: absolute; z-index: 3; right: 0; bottom: -5px; left: 0; height: 10px; background-image: radial-gradient(circle at center, var(--green-bright) 0 4px, transparent 5px); background-position: center; background-size: 32px 10px; background-repeat: repeat-x; pointer-events: none; }
@@ -182,8 +179,6 @@ h1 { letter-spacing: -.06em; line-height: .86; }
   .nav-mark { font-size: 17px; }
   .hero { min-height: 100svh; padding: clamp(8rem, 20svh, 10rem) 10vw clamp(4rem, 11svh, 6.5625rem); align-items: flex-start; background-image: var(--hero-gradient); }
   .hero::after { inset: 0; }
-  .hero-cipher-field { opacity: .58; }
-  .hero-cipher-field > div { transform: translate3d(0, -5%, 0) scale(.76); transform-origin: center center; }
   .hero-topline { top: 90px; left: 10vw; right: 10vw; }
   h1 { font-size: clamp(4.1875rem, 2rem + 8vw, 7.8125rem); }
   .hero-intro { margin-top: 36px; }
