@@ -9,7 +9,7 @@ const svgProps = ({ size = 16, strokeWidth = 1.7 }: IconProps) => ({ width: size
 const Instagram = (p: IconProps) => <svg {...svgProps(p)}><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r=".6" /></svg>;
 const Facebook = (p: IconProps) => <svg {...svgProps(p)}><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" /></svg>;
 import DigitalRain from "@/components/DigitalRain";
-import MoltenRingCarousel from "@/components/MoltenRingCarousel";
+import VerticalImageStack from "@/components/VerticalImageStack";
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
@@ -108,7 +108,6 @@ export default function Home() {
   const [handTool, setHandTool] = useState(false);
   const [showGuides, setShowGuides] = useState(true);
   const [isPanning, setIsPanning] = useState(false);
-  const [expandedPiece, setExpandedPiece] = useState<string | null>(null);
   const [navOnLight, setNavOnLight] = useState(false);
   const [navHidden, setNavHidden] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -138,7 +137,7 @@ export default function Home() {
   }, [editMode, state]);
   useEffect(() => {
     const lightSections = Array.from(document.querySelectorAll<HTMLElement>('.manifesto, .story'));
-    const imageBoxes = Array.from(document.querySelectorAll<HTMLElement>('.piece-image-wrap'));
+    const imageBoxes = Array.from(document.querySelectorAll<HTMLElement>('.vertical-stack-card'));
     if (!lightSections.length) return;
     const updateNavTone = () => {
       const nav = document.querySelector<HTMLElement>('.nav-wrap');
@@ -366,7 +365,7 @@ export default function Home() {
 
       <section className="manifesto section-grid" id="manifesto"><div className="section-label" data-reveal><Editable id="manifesto-index" label="Manifesto section number" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag}>01</Editable><Editable id="manifesto-label" label="Manifesto section label" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag}>In plain sight</Editable></div><div className="manifesto-copy"><Editable id="manifesto" label="Manifesto close" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag}><h2 data-reveal><span className="manifesto-lead">We don&apos;t sell a costume.</span><span className="manifesto-primary">We sell the moment<br />with a touch of Art.</span><span className="manifesto-secondary">We call it<br /><span className="manifesto-accent">Trompe L&apos;oeil.</span></span></h2></Editable></div></section>
 
-      <section className="drop" id="drop"><div className="drop-header section-grid"><div className="section-label" data-reveal><Editable id="drop-index" label="Drop section number" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag}>02</Editable><Editable id="drop-label" label="Drop section label" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag}>The first drop</Editable></div><div className="drop-heading"><Editable id="drop-title" label="Drop title" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag} className="drop-title" style={styleFor("drop-title")}>Six pieces.<br /><em>No restock.</em></Editable><Editable id="drop-subtitle" label="Drop subtitle" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag} style={styleFor("drop-subtitle")}>No re-run. Once a trick&apos;s been seen, it&apos;s over.</Editable></div></div><div className="drop-carousel"><MoltenRingCarousel label="The first drop" items={pieces.map((piece) => ({ image: imageFor(`piece-${piece.number}`, piece.image), title: piece.title, meta: piece.price }))} /></div></section>
+      <section className="drop" id="drop"><div className="drop-header section-grid"><div className="section-label" data-reveal><Editable id="drop-index" label="Drop section number" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag}>02</Editable><Editable id="drop-label" label="Drop section label" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag}>The first drop</Editable></div><div className="drop-heading"><Editable id="drop-title" label="Drop title" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag} className="drop-title" style={styleFor("drop-title")}>Six pieces.<br /><em>No restock.</em></Editable><Editable id="drop-subtitle" label="Drop subtitle" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag} style={styleFor("drop-subtitle")}>No re-run. Once a trick&apos;s been seen, it&apos;s over.</Editable></div></div><div className="drop-carousel"><VerticalImageStack label="The first drop" items={pieces.map((piece) => ({ image: imageFor(`piece-${piece.number}`, piece.image), title: piece.title, meta: piece.price }))} /></div></section>
 
       <section className="story section-grid" id="story"><div className="section-label" data-reveal><Editable id="story-index" label="Story section number" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag}>03</Editable><Editable id="story-label" label="Story section label" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag}>What we believe</Editable></div><div className="story-content"><Editable id="story-display" label="Story manifesto" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag} className="display-copy" style={styleFor("story-display")}>{state.edits["story-display"]?.text ?? "A wink is a small deception everyone's in on. That's the label: clothes with a second read, built for people who like being the only ones who get the joke."}</Editable><div className="story-columns"><Editable id="story-audience" label="Story audience copy" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag} style={styleFor("story-audience")}>Every good trick has two audiences: the one who's tricked, and the second who's <em>in on it.</em></Editable><Editable id="story-dresses" label="Story product copy" editMode={editMode} selectedId={selectedId} onSelect={setSelectedId} onPointerDown={startDrag} style={styleFor("story-dresses")}>HoodWink dresses the second kind. A silhouette that catches the eye of a person across the street and that you can call <em>Deceiving.</em></Editable></div></div></section>
 
