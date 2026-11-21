@@ -387,23 +387,6 @@ h2[data-reveal] > span:nth-child(3) { transition-delay: .35s; }
 .drop-header { align-items: end; }
 .drop-heading { text-align: right; justify-self: end; }
 .drop-heading > span { display: block; }
-.drop-carousel { min-height: min(78vh, 700px); padding: 12px 4.5vw 50px; }
-.vertical-stack { position: relative; width: min(100%, 760px); height: min(76vh, 650px); min-height: 480px; margin: 0 auto; color: var(--paper); user-select: none; }
-.vertical-stack-stage { position: relative; width: min(100%, 430px); height: 100%; margin: 0 auto; touch-action: pan-y; cursor: grab; }
-.vertical-stack-stage:active { cursor: grabbing; }
-.vertical-stack-card { position: absolute; top: 50%; left: 50%; display: flex; width: min(76vw, 370px); height: min(64vh, 530px); min-height: 360px; flex-direction: column; overflow: hidden; border: 1px solid rgba(233,229,219,.3); border-radius: 26px; background: #b6ad9c; box-shadow: 0 18px 45px rgba(0,0,0,.2); cursor: pointer; transform-origin: center center; transition: transform .48s var(--ease-out), opacity .28s ease, box-shadow .28s ease; will-change: transform; }
-.vertical-stack-card.is-active { box-shadow: 0 28px 70px rgba(0,0,0,.35); }
-.vertical-stack-card:focus-visible { outline: 2px solid var(--green-bright); outline-offset: 5px; }
-.vertical-stack-card img { display: block; width: 100%; height: 100%; min-height: 0; object-fit: cover; object-position: center; filter: saturate(.78) contrast(.96); pointer-events: none; -webkit-user-drag: none; }
-.vertical-stack-card-meta { position: absolute; right: 16px; bottom: 16px; left: 16px; display: flex; align-items: end; justify-content: space-between; gap: 16px; padding: 12px 0 0; color: var(--paper); font: 400 11px var(--mono); letter-spacing: .06em; text-transform: uppercase; text-shadow: 0 1px 12px rgba(0,0,0,.55); }
-.vertical-stack-card-meta strong { color: var(--green-bright); font-weight: 400; }
-.vertical-stack-hint { margin: 24px 0 0; color: var(--muted); text-align: center; font: 400 10px var(--mono); letter-spacing: .08em; text-transform: uppercase; }
 @media (max-width: 760px) {
   .drop-heading { justify-self: stretch; }
-  .drop-carousel { min-height: 0; padding: 18px 20px 48px; }
-  .vertical-stack { width: 100%; height: min(132vw, 560px); min-height: 410px; }
-  .vertical-stack-stage { width: 100%; }
-  .vertical-stack-card { width: min(78vw, 320px); height: min(112vw, 450px); min-height: 0; border-radius: 20px; }
-  .vertical-stack-card-meta { right: 14px; bottom: 14px; left: 14px; font-size: 9px; }
-  .vertical-stack-hint { margin-top: 18px; font-size: 9px; }
 }
